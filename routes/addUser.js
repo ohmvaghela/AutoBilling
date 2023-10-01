@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const router = express.Router();
 const userSchema = require("../model/userSchema.js");
 
@@ -27,7 +26,7 @@ router.post("/",async (req,res)=>{
         });
     }catch(err){
         console.log(err);
-        res.send(["user not added client size: \n",err])
+        res.send(["user not added client error : ",err])
     }
 });
 

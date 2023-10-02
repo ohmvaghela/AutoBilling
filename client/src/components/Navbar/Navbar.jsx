@@ -1,8 +1,10 @@
 import Button from "../Button/Button";
 
 const Navbar = () => {
+  // bg-[#f6f9fc]
+
   return (
-    <div className="flex justify-center items-center w-screen h-[68px] bg-[#f6f9fc]">
+    <nav className="flex justify-center items-center w-screen h-[68px] sticky top-0 z-50 ">
       <div className="flex items-center py-3 px-4 w-[1080px]">
         <div className="p-1 font-xl">logo</div>
         <div className="flex items-center justify-between flex-1">
@@ -30,7 +32,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

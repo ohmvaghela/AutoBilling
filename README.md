@@ -14,11 +14,3 @@ Database password : seventhFloor
 | `validator`           |                                                         |
 | `mongoose-type-email` |                                                         |
 | `dotenv`              |                                                         |
-
-> Server connection
-
-```
-DATABASEURL = mongodb+srv://autoinvoice:seventhFloor@autoinvoice.5huhtap.mongodb.net/AutoInvoice/?retryWrites=true&w=majority
-```
-
-aa

@@ -14,7 +14,8 @@ router.post("/",async (req,res)=>{
             shopName : req.body.shopName,
             firstName : req.body.firstName,
             lastName : req.body.lastName,
-            shopEmail : req.body.shopEmail
+            shopEmail : req.body.shopEmail,
+            password: req.body.password
         });
         const newUser = await user.save().then((x)=>{
             console.log(x);

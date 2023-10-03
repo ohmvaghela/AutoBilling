@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userSchema = require("../model/userSchema.js");
+const cookieParser = require("cookie-parser");
 
 router.use(express.json());
 
@@ -17,8 +18,15 @@ router.post("/",async (req,res)=>{
             shopEmail : req.body.shopEmail,
             password: req.body.password
         });
+        const token = await user.generateAuthToken();
+        
         const newUser = await user.save().then((x)=>{
-            console.log(x);
+            // console.log(x);
+            res.cookie("jwt", token, {
+                expires: new Date(Date.now() + 60000),
+                httpOnly: true,
+              });
+            console.log("user added succesfully");
             res.send("added succesfully");
             return;
         }).catch((err)=>{

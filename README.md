@@ -1,6 +1,7 @@
 Database password : seventhFloor
+> # Always use `git pull` before making changes then push
 
-> # Add DATABASEURL, SECRET_KEY
+>  Add DATABASEURL, SECRET_KEY
 
 # Installed
 

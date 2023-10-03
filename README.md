@@ -1,5 +1,7 @@
 Database password : seventhFloor
 
+> # Add DATABASEURL, SECRET_KEY
+
 # Installed
 
 |                       |                                                         |
@@ -16,10 +18,3 @@ Database password : seventhFloor
 | `dotenv`              |                                                         |
 | `cookie-parser`              |Used for saving authentication token to the cookie                                                         |
 
-## Server connection
-
-```
-DATABASEURL = mongodb+srv://autoinvoice:seventhFloor@autoinvoice.5huhtap.mongodb.net/AutoInvoice/?retryWrites=true&w=majority
-```
-
-aa

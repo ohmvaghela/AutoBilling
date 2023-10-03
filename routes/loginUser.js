@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   console.log(doc);
   try {
     const passmatch = await bcrypt.compare(password, doc.password);
-    console.log(passmatch);
+    // console.log(passmatch);
     if (passmatch) {
       // console.log("hi")
       const token = await doc.generateAuthToken();

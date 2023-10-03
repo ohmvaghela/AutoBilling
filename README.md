@@ -1,5 +1,3 @@
-Database password : seventhFloor
-
 > # Add DATABASEURL, SECRET_KEY
 
 # Installed

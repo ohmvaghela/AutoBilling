@@ -5,28 +5,34 @@ const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 
 router.use(express.json());
-
+const cur_route = "loginUser : ";
 router.post("/", async (req, res) => {
   const loginEmail = req.body.loginEmail;
   const password = req.body.password;
   const doc = await userSchema.findOne({ shopEmail: loginEmail });
-  console.log(doc);
+  // console.log(cur_route+"doc : "+doc);
   try {
-    const passmatch = await bcrypt.compare(password, doc.password);
-    // console.log(passmatch);
-    if (passmatch) {
-      // console.log("hi")
-      const token = await doc.generateAuthToken();
-      // console.log(token);
-      res.cookie("jwt", token, {
-        expires: new Date(Date.now() + 60000),
-        httpOnly: true,
-      });
+    if(!doc){
+      console.log(cur_route + "user not found");
+      res.send("user not found");
     }
-    if (doc && passmatch) {
-      res.send(doc);
-    } else {
-      throw "Password is incorrect";
+    else{
+      const passmatch = await bcrypt.compare(password, doc.password);
+      if (passmatch) {
+        // console.log(cur_route+"hi")
+        const token = await doc.generateAuthToken();
+        // console.log(cur_route+token);
+        res.cookie("jwt", token, {
+          expires: new Date(Date.now() + 60000),
+          httpOnly: true,
+        });
+      }
+      if (doc && passmatch) {
+        res.send(doc);
+      } else {
+        throw "Password is incorrect";
+      }
+      
     }
   } catch (e) {
     res.send(e);

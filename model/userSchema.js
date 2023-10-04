@@ -3,7 +3,7 @@ const validator = require("validator");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('mongoose-type-email');
-
+const cur_route = "userSchema : ";
 const userSchema = new mongoose.Schema({
   shopID: {
     type: Number,
@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.Email,
         required: true,
       },
+      // pdf, cost
     },
   ],
   tokens: [
@@ -63,10 +64,11 @@ userSchema.methods.generateAuthToken = async function(){
         const token = jwt.sign({_id: this._id.toString()}, process.env.SECRET_KEY);
         this.tokens = this.tokens.concat({token:token});
         await this.save();
-        // console.log(token);
+        // console.log([cur_route,token]);
         return token;
     }catch(error){
-        res.send("the error part" + error);
+        console.log(cur_route+"auth token not generated");
+        // res.send("the error part" + error);
     }
 }
 

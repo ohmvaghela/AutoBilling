@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const LandingPage = () => {
   return (
     <div
@@ -11,11 +12,11 @@ const LandingPage = () => {
       {/* left half */}
       <div className="flex justify-center items-center  ml-[250px] ">
         <div className="flex flex-col gap-5">
-          <h1 className="text-6xl font-extrabold">
-            Your Invoices,
-            <br /> Automated
+          <h1 className="text-6xl font-extrabold justify-center">
+            Your <span className="text-[#f6f9fc]">Invoices</span>
+            <br /> <span className="ml-5">Automated.</span>
           </h1>
-          <p className="font-medium">
+          <p className="font-extrabold ">
             Streamline invoicing with InvoiceGenius. Create professional <br />
             invoices in seconds, freeing you to focus on your business. <br />{" "}
             Join now.

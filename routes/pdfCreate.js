@@ -20,19 +20,8 @@ const data = {
     cost:1506000,
 };
 
-router.get("/", (req,res)=>{
-    // ejs.renderFile(path.join(__dirname, '../views/bill.ejs'), data, {}, function(err, str) {
-    //     if (err) return res.send(["error",err]);
-        
-    //     // str now contains your rendered html
-    //     //your pdf object should be used here
-    //     pdf.create(str).toFile("name of the file", function(err, data) {
-    //         if (err) return res.send ("error",err);
-            
-    //         // res.send("File created successfully");
-    //     });
-    // });
-    res.render("bill",{data : data})
+router.get("/", (req, res) => {
+  res.render("bill", { data: data });
 });
 
 module.exports = router;

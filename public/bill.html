@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title><%=data.header%></title>
+		<title>A simple, clean, and responsive HTML invoice template</title>
 
 		<style>
 			.invoice-box {
@@ -107,13 +107,13 @@
 						<table>
 							<tr>
 								<td class="title">
-									<img src="<%= data.logo %>" style="max-height: 200px;max-width: 200px;  ;" />
+									<img src="{{ data.logo }}" style="max-height: 200px;max-width: 200px;  ;" />
 								</td>
 
 								<td>
-									Invoice ID : <%=data.invoiceID%><br />
-									Created: <%=data.curDate%><br />
-									Due: <%=data.dueDate%>
+									Invoice ID : {{data.invoiceID}}<br />
+									Created: {{data.curDate}}<br />
+									Due: {{data.dueDate}}
 								</td>
 							</tr>
 						</table>
@@ -125,15 +125,15 @@
 						<table>
 							<tr>
 								<td>
-									<%=data.name%><br />
-									<%= data.companyLocaction%><br>
+									{{data.name}}<br />
+									{{ data.companyLocaction}}<br>
 									
 								</td>
 
 								<td>
-									<%=data.companyName%><br />
-									<%=data.buyerLocaction%><br />
-									<%=data.email%>
+									{{data.companyName}}<br />
+									{{data.buyerLocaction}}<br />
+									{{data.email}}
 								</td>
 							</tr>
 						</table>
@@ -148,95 +148,95 @@
 					<td>Price</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 				<tr class="item last">
-					<td><%=data.Description%></td>
+					<td>{{data.Description}}</td>
 
-					<td><%=data.cost%></td>
+					<td>{{data.cost}}</td>
 				</tr>
 
 				<tr class="total">
 					<td></td>
 
-					<td>Total: <%=data.cost%></td>
+					<td>Total: {{data.cost}}</td>
 				</tr>
 			</table>
 		</div>

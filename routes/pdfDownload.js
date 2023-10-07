@@ -29,15 +29,17 @@ async function exportWebsiteAsPdf(websiteUrl, outputPath) {
   return PDF;
 }
 
-router.get("/", (req, res) => {
-  exportWebsiteAsPdf("http://localhost:8000/pdfCreate", "./public/result.pdf")
-    .then(() => {
-      console.log("PDF created successfully.");
-    })
-    .catch((error) => {
-      console.error("Error creating PDF:", error);
-    });
-});
+router.get("/", async (req, res) => {
+  const url = "http://localhost:8000/pdfCreate";
+  await exportWebsiteAsPdf(url, "./public/result.pdf")
+  .then(() => {
+    console.log("PDF created successfully.");
+  })
+  .catch((error) => {
+    console.error("Error creating PDF:", error);
+  });
+  res.redirect(url);
+  });
 
 module.exports = router;
 // router = router.use(express.json());

@@ -18,6 +18,7 @@ const data = {
     curDate:Date.now().toString(),
     Description:"2 Russian \n 1 Thar",
     cost:1506000,
+    header:"invoice header",
 };
 
 router.get("/", (req, res) => {

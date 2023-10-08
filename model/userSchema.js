@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+// const billSchema = require('./billSchema');
+
 require('mongoose-type-email');
+
+
 const cur_route = "userSchema : ";
 const userSchema = new mongoose.Schema({
   shopID: {

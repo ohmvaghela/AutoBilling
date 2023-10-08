@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 const ejs = require("ejs");
 const path = require("path");
-const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer");
 // router = router.use(express.json());
 
 async function exportWebsiteAsPdf(websiteUrl, outputPath) {

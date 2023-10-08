@@ -14,7 +14,6 @@ router.post("/", async (req,res)=>{
             consumerName : req.body.consumerName,
             consumerEmail: req.body.consumerEmail,
             shopEmail : req.body.shopEmail,
-            dateTime : req.body.dateTime,
             billAmount: req.body.billAmount,
             billDescription: req.body.billDescription
         });

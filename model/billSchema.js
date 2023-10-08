@@ -32,6 +32,11 @@ const billSchema = new mongoose.Schema({
     billDescription:{
         type:String,
         required: true,
+    },
+    billStatus:{
+        type:Boolean,
+        require: true,
+        default: false,
     }
 })
 

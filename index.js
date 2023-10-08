@@ -21,4 +21,10 @@ app.use("/pdfCreate",pdfRouter);
 const downRouter = require("./routes/pdfDownload.js");
 app.use("/pdfDownload", downRouter);
 
+const updateBill = require("./routes/billFetch.js");
+app.use("/billFetch",updateBill);
+
+const shopFetch = require("./routes/shopFetch.js");
+app.use("/shopFetch",shopFetch);
+
 app.listen(8000);

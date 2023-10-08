@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// const billSchema = require('./billSchema');
+const billSchema = require('./billSchema');
 
 require('mongoose-type-email');
 
@@ -40,19 +40,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  bills: [
-    {
-      billID: {
-        type: Number,
-        required: true,
-      },
-      customerEmaill: {
-        type: mongoose.SchemaTypes.Email,
-        required: true,
-      },
-      // pdf, cost
-    },
-  ],
   // used to track login history
   tokens: [
     {

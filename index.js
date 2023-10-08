@@ -27,4 +27,7 @@ app.use("/billFetch",updateBill);
 const shopFetch = require("./routes/shopFetch.js");
 app.use("/shopFetch",shopFetch);
 
+const emailRouter = require("./routes/email.js");
+app.use("/sendEmail",emailRouter);
+
 app.listen(8000);

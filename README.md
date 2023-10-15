@@ -19,3 +19,60 @@ Database password : seventhFloor
 | `dotenv`              |                                                         |
 | `cookie-parser`              |Used for saving authentication token to the cookie                                                         |
 
+# REQUESTS
+- User SignUp
+    - Request
+    ```
+    http://localhost:8000/addUser
+    ```
+    - Body
+    ```
+    {
+    "shopName":"xyz",
+    "firstName":"xyz",
+    "shopEmail":"xyz@gmail.com",
+    "lastName":"xyz",
+    "password":"xyz"
+    }
+    ```
+
+- User Login
+    - Request
+    ```
+    http://localhost:8000/loginUser
+    ```
+    - Body
+    ```
+    {
+    "loginEmail": "xyz@gmail.com",
+    "password": "xyz"
+    }
+    ```
+- Add bill
+    - Request
+    ```
+    http://localhost:8000/addBill
+    ```
+    - Body
+    ```
+    {
+    "consumerName" :"rishab",
+    "consumerEmail" :"rkt10@iitbbs.ac.in",
+    "shopEmail" :"an30@iitbbs.ac.in",
+    "billAmount" :5000,
+    "billDescription":"sadas"
+    }
+    ```
+- Bill Fetch
+    - Request
+    ```
+    http://localhost:8000/billFetch/:id
+    ```
+- Shop Fetch
+    - Request
+    ```
+    http://localhost:8000/shopFetch?email=xyz.gmail.com
+    ```
+
+
+

@@ -1,7 +1,10 @@
 const express = require("express")
+const cors = require("cors")
 require("./connect");
 const app = express();
 app.use(express.static('public'));
+app.use(cors());
+
 app.set("view engine","ejs");
 
 
@@ -29,5 +32,8 @@ app.use("/shopFetch",shopFetch);
 
 const emailRouter = require("./routes/email.js");
 app.use("/sendEmail",emailRouter);
+
+const paymentStatus = require("./routes/paymentStatus.js");
+app.use("/paymentStatus",paymentStatus);
 
 app.listen(8000);

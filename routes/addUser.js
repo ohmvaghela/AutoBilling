@@ -19,7 +19,6 @@ router.post("/",async (req,res)=>{
             password: req.body.password
         });
         const token = await user.generateAuthToken();
-        
         const newUser = await user.save().then((x)=>{
             // console.log(cur_route+x);
             res.cookie("jwt", token, {
@@ -38,5 +37,10 @@ router.post("/",async (req,res)=>{
         res.send(["user not added client error : ",err])
     }
 });
+
+router.get("/", async(req,res)=>{
+    const d = await userSchema.find();
+    res.send(d);
+})
 
 module.exports = router;

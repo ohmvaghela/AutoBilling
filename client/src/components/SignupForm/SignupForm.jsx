@@ -1,9 +1,37 @@
-import React from "react";
-import { useState } from "react";
+// import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import * as Components from "./Components";
 
 function SignupForm() {
-  const [signIn, toggle] = React.useState(true);
+  const [signIn, toggle] = useState(true);
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const fetchUsers = async () => {
+    const {data} = await axios.get("http://localhost:8000/addUser");
+    console.log(data);
+  }
+
+  const loginUser = async () => {
+    await axios.post("http://localhost:8000/loginUser", values).then((data)=>{
+      console.log(data);
+    }).catch((err)=>{
+      console.log(err);
+    });
+  }
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginUser();
+  }
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   return (
     <div className="flex justify-center items-center mt-[100px]">
       <Components.Container>
@@ -18,10 +46,22 @@ function SignupForm() {
         </Components.SignUpContainer>
 
         <Components.SignInContainer signinIn={signIn}>
-          <Components.Form>
+          <Components.Form onSubmit={handleSubmit}>
             <Components.Title>Sign in</Components.Title>
-            <Components.Input type="email" placeholder="Email" />
-            <Components.Input type="password" placeholder="Password" />
+            <Components.Input
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              placeholder="Email"
+            />
+            <Components.Input
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              placeholder="Password"
+            />
             <Components.Anchor href="#">
               Forgot your password?
             </Components.Anchor>

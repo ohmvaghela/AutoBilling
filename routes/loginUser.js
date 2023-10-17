@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 router.use(express.json());
 const cur_route = "loginUser : ";
 router.post("/", async (req, res) => {
-  const loginEmail = req.body.loginEmail;
+  const loginEmail = req.body.email;
   const password = req.body.password;
   const doc = await userSchema.findOne({ shopEmail: loginEmail });
   // console.log(cur_route+"doc : "+doc);
@@ -32,7 +32,6 @@ router.post("/", async (req, res) => {
       } else {
         throw "Password is incorrect";
       }
-      
     }
   } catch (e) {
     res.send(e);

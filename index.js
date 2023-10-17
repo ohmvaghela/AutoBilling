@@ -1,10 +1,15 @@
 const express = require("express")
+var cors = require("cors");
+
 require("./connect");
 const app = express();
 app.use(express.static('public'));
+
+app.use(cors({
+  origin:"*"
+}));
+
 app.set("view engine","ejs");
-
-
 
 const addUserRouter = require("./routes/addUser.js");
 app.use("/addUser",addUserRouter);

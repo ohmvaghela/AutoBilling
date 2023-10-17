@@ -9,17 +9,18 @@ router.use(express.json());
 router.post("/", async (req, res) => {
   try {
     var mail = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.ethereal.email",
+      port: 587,
       auth: {
-        user: "",
-        pass: "",
+        user: "willard20@ethereal.email",
+        pass: "WcdGDpD9sw8zCTWM7h",
       },
     });
     var mailOptions = {
-      from: "seventhfloor860@gmail.com",
-      to: "an30@iitbbs.ac.in",
-      subject: "Bhau Rand",
-      text: "Bhau is certified Rand",
+      from: "willard20@ethereal.email",
+      to: "ra22@iitbbs.ac.in",
+      subject: "Hi",
+      text: "This is the sample email",
       attachments: [
         {
           filename: "Hello.txt",

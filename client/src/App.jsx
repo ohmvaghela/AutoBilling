@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import SignupForm from "./components/SignupForm/SignupForm";
+import DefaultDashboard from "./components/Dashboard/DefaultDashboard";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <Routes>
           <Route path="/home" element={<LandingPage />} />
           <Route path="/signup" element={<SignupForm />} />
+          <Route path="/dashboard" element={<DefaultDashboard />} />
           <Route path="*" element={<Navigate to={"/home"} />} />
         </Routes>
       </div>

@@ -12,10 +12,10 @@ router.post("/",async (req,res)=>{
         const user = new userSchema({
             shopID : size,
             createdAt : Date.now() ,
-            shopName : req.body.shopName,
-            firstName : req.body.firstName,
-            lastName : req.body.lastName,
-            shopEmail : req.body.shopEmail,
+            shopName : req.body.name,
+            firstName : req.body.firstname,
+            lastName : req.body.lastname,
+            shopEmail : req.body.email,
             password: req.body.password
         });
         const token = await user.generateAuthToken();

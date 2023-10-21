@@ -1,4 +1,6 @@
 const express = require("express")
+var cors = require("cors");
+
 require("./connect");
 const app = express();
 const ejs = require("ejs");
@@ -9,6 +11,12 @@ app.get("/", (req, res) => {
 
     res.render("razor");    
 })
+
+app.use(cors({
+  origin:"*"
+}));
+
+app.set("view engine","ejs");
 
 const addUserRouter = require("./routes/addUser.js");
 app.use("/addUser",addUserRouter);

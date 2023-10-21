@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 const LandingPage = () => {
   return (
-    <div className="flex w-screen h-screen w-5/6 m-auto ">
+    <div className="flex m-auto bg-repeat-y ">
       {/* left half */}
       <div className="flex justify-center items-center  ml-auto ">
         <div className="flex flex-col gap-5">
@@ -18,7 +18,7 @@ const LandingPage = () => {
       </div>
 
       {/* right half */}
-      <div className="flex justify-center items-center  flex-1 ">
+      <div className="flex justify-center items-center flex-1 ">
         <img
           src="../../public/invoice4.svg"
           alt="Invoice"

@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const express = require("express");
 const router = express.Router();
+const cron = require('node-cron');
 // const userSchema = require("../model/userSchema.js");
 // const cookieParser = require("cookie-parser");
 
@@ -11,15 +12,15 @@ router.post("/", async (req, res) => {
     var mail = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "",
-        pass: "",
+        user: "seventhfloor860@gmail.com",
+        pass: "fatu qfro vciz rown",
       },
     });
     var mailOptions = {
       from: "seventhfloor860@gmail.com",
-      to: "an30@iitbbs.ac.in",
-      subject: "Bhau Rand",
-      text: "Bhau is certified Rand",
+      to: "von10@iitbbs.ac.in",
+      subject: "PAYMENT REMINDER",
+      text: "PAYMENT REMINDER",
       attachments: [
         {
           filename: "Hello.txt",
@@ -28,15 +29,29 @@ router.post("/", async (req, res) => {
       ],
     };
 
-    mail.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-        res.send(error);
-      } else {
-        console.log("Email sent:" + info.response);
-        res.send("Email sent");
-      }
+    cron.schedule('58 11 * * 6', function () {
+      console.log('---------------------');
+      console.log('Running Cron Process');
+      // Delivering mail with sendMail method
+      mail.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.send(error);
+        } else {
+          console.log("Email sent:" + info.response);
+          res.send("Email sent");
+        }
+      });
     });
+    // mail.sendMail(mailOptions, function (error, info) {
+    //   if (error) {
+    //     console.log(error);
+    //     res.send(error);
+    //   } else {
+    //     console.log("Email sent:" + info.response);
+    //     res.send("Email sent");
+    //   }
+    // });
   } catch (err) {
     console.log(err);
     res.send(err);

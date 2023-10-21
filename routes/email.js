@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
       from: "seventhfloor860@gmail.com",
       to: "ra22@iitbbs.ac.in",
       subject: "Payment Due",
-      text: "This is link to make payment http://localhost:8000/" + id,
+      text: "This is link to make payment http://localhost:8000/payment/" + id,
       attachments: [
         {
           filename: "Hello.txt",

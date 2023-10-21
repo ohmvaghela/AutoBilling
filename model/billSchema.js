@@ -7,6 +7,10 @@ const billSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    orderId:{
+        type:String,
+        required: true,
+    },
     consumerName:{
         type: String,
         required:true,

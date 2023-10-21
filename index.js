@@ -8,13 +8,6 @@ app.use(express.static('public'));
 app.set("view engine","ejs");
 const path = require("path");
 
-app.get("/:id", (req, res) => {
-  const data = {
-    id: req.params.id
-  };
-    res.render("razor", { data: data });
-})
-
 app.use(cors({
   origin:"*"
 }));
@@ -51,4 +44,6 @@ app.use("/razor",razorRouter);
 const fetchOrders = require("./routes/fetchOrders.js");
 app.use("/fetchOrders",fetchOrders);
 
+const paymentRouter = require("./routes/payment.js");
+app.use("/payment",paymentRouter);
 app.listen(8000);

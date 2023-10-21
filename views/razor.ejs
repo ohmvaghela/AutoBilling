@@ -31,27 +31,15 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
       document.getElementById("pay-button").onclick = function (e) {
-        const xhr = new XMLHttpRequest();
-
-        xhr.open("POST", "/razor/<%= data.id %>");
-        xhr.send();
-
-        xhr.onload = async function () {
-          if (xhr.status === 200) {
-            // Success!
-            logg = JSON.parse(xhr.responseText);
-            console.log(logg.id);
-
-            console.log(JSON.stringify(options));
             var options = {
               key: 'rzp_test_MBehv3EgTY8ULU',
-              amount: logg.amount * 100,
+              amount: "<%= data.amount %>" * 100,
               currency: "INR",
               name: "Dummy Academy",
               description: "Pay & Checkout this Course, Upgrade your DSA Skill",
               image:
                 "https://media.geeksforgeeks.org/wp-content/uploads/20210806114908/dummy-200x200.png",
-              order_id: logg.id,
+              order_id: "<%= data.orderid %>",
               //   order_id: "order_MoLLxrlXrcCcTR",
               handler: function (response) {
                 console.log(response);
@@ -82,11 +70,11 @@
             });
             razorpayObject.open();
             e.preventDefault();
-          } else {
-            // Error!
-            console.log("here :", xhr.statusText);
-          }
-        };
+         // } else {
+         //   // Error!
+         //   console.log("here :", xhr.statusText);
+         // }
+        // };
       };
     </script>
   </body>

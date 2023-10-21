@@ -10,7 +10,7 @@ var razorpayInstance = new Razorpay({
 });
 
 const createOrder = async (req, res) => {
-  const id = req.params.id;
+  // const id = req.params.id;
   var options = {
     amount: 5100, // amount in the smallest currency unit
     currency: "INR",
@@ -24,6 +24,7 @@ const createOrder = async (req, res) => {
   var my_order;
   razorpayInstance.orders.create(options, (err, order) => {
     my_order = order;
+    console.log(my_order);
     if (!err) res.json(order);
     else res.send(err);
   });

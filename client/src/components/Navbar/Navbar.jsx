@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ResourceMenus } from "../../utils/helpers";
+import { Outlet } from "react-router-dom";
 
 const Navbar = () => {
   // bg-[#f6f9fc]
@@ -20,6 +21,7 @@ const Navbar = () => {
 
   return (
     // #0a2540]/75
+    <>
     <nav
       className={`${color ? "bg-[#f6f9fc]" : "transparent"} ${
         color && "bg-opacity-88"
@@ -90,6 +92,11 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    <div id="detail">
+        <Outlet />
+      </div>
+
+    </>
   );
 };
 

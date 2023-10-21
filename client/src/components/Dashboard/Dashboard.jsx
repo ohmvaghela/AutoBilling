@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import { createContext, useContext, useState } from 'react';
 import Form from "./Form";
 import DataContext from './context';
+import DisplayOrder from "./DisplayOrder";
 
 const Dashboard = ({children}) => {
 
@@ -14,13 +15,13 @@ const Dashboard = ({children}) => {
     const renderContent = () => {
         switch (load) {
             case "bill":
-                return <div className="text-center">Bills</div>;
+                return <div className="text-center"><DisplayOrder/></div>;
             case "setting":
                 return <div className="text-center">Setting</div>;
             case "NewBill":
                 return <Form/>;
             default:
-                return <div className="text-center">Unknown load state</div>;
+                return <div className="text-center">Unknown load state {load}</div>;
         }
     };
 

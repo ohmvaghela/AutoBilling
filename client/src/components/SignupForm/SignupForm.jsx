@@ -31,7 +31,7 @@ function SignupForm() {
       .then((response) => {
         console.log(response);
         if(response.statusText === "OK"){
-          window.location.href = "/home";
+          window.location.href = "/dashboard";
           console.log("hi");
         }
       })

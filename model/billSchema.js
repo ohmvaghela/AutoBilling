@@ -22,7 +22,7 @@ const billSchema = new mongoose.Schema({
     shopEmail: {
         type: mongoose.SchemaTypes.Email,
         required: true,
-        unique: true,
+        // unique: false,
       },
     dateTime:{
         type:Date,

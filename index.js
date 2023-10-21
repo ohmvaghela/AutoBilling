@@ -7,9 +7,12 @@ const ejs = require("ejs");
 app.use(express.static('public'));
 app.set("view engine","ejs");
 const path = require("path");
-app.get("/", (req, res) => {
 
-    res.render("razor");    
+app.get("/:id", (req, res) => {
+  const data = {
+    id: req.params.id
+  };
+    res.render("razor", { data: data });
 })
 
 app.use(cors({

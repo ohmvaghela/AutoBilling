@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Razorpay = require('razorpay');
-// const Razorpay = require('razorpay');
 require('dotenv').config();
 const {KEY_ID, KEY_SECRET} = process.env;
 

@@ -7,19 +7,20 @@ const router = express.Router();
 router.use(express.json());
 
 router.post("/", async (req, res) => {
+  const id = req.body.id;
   try {
     var mail = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "",
-        pass: "",
+        user: "seventhfloor860@gmail.com",
+        pass: "fatu qfro vciz rown",
       },
     });
     var mailOptions = {
       from: "seventhfloor860@gmail.com",
-      to: "an30@iitbbs.ac.in",
-      subject: "Bhau Rand",
-      text: "Bhau is certified Rand",
+      to: "ra22@iitbbs.ac.in",
+      subject: "Payment Due",
+      text: "This is link to make payment http://localhost:8000/" + id,
       attachments: [
         {
           filename: "Hello.txt",

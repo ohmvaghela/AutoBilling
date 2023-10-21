@@ -33,7 +33,7 @@
       document.getElementById("pay-button").onclick = function (e) {
         const xhr = new XMLHttpRequest();
 
-        xhr.open("POST", "/razor");
+        xhr.open("POST", "/razor/<%= data.id %>");
         xhr.send();
 
         xhr.onload = async function () {
@@ -44,7 +44,7 @@
 
             console.log(JSON.stringify(options));
             var options = {
-              key: '<% process.env.KEY_ID %>',
+              key: 'rzp_test_MBehv3EgTY8ULU',
               amount: logg.amount * 100,
               currency: "INR",
               name: "Dummy Academy",

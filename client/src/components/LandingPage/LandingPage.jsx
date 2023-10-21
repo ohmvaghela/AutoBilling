@@ -1,16 +1,9 @@
 import { Link } from "react-router-dom";
 const LandingPage = () => {
   return (
-    <div
-      className="flex w-screen h-screen "
-      style={{
-        background: ` #6190E8`,
-        background: `-webkit-linear-gradient(to right, #A7BFE8, #6190E8)`,
-        background: `linear-gradient(to right, #A7BFE8, #6190E8)`,
-      }}
-    >
+    <div className="flex w-screen h-screen w-5/6 m-auto ">
       {/* left half */}
-      <div className="flex justify-center items-center  ml-[250px] ">
+      <div className="flex justify-center items-center  ml-auto ">
         <div className="flex flex-col gap-5">
           <h1 className="text-6xl font-extrabold justify-center">
             Your <span className="text-[#f6f9fc]">Invoices</span>
@@ -29,7 +22,7 @@ const LandingPage = () => {
         <img
           src="../../public/invoice4.svg"
           alt="Invoice"
-          className="w-[750px] h-auto"
+          className="w-[400px] h-auto"
         />
       </div>
     </div>

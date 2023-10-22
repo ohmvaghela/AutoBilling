@@ -11,8 +11,8 @@ var razorpayInstance = new Razorpay({
 
 const fetchOrders = async (req,res)=>{
     let options = {
-        count : req.query.count,
-        skip : req.query.skip
+        count : 100,
+        // skip : req.query.skip
     }
     razorpayInstance.orders.all(options,(err,orders)=>{
         if(!err){

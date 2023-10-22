@@ -46,4 +46,8 @@ app.use("/fetchOrders",fetchOrders);
 
 const paymentRouter = require("./routes/payment.js");
 app.use("/payment",paymentRouter);
+
+const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
+app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
+
 app.listen(8000);

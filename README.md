@@ -74,5 +74,11 @@ Database password : seventhFloor
     http://localhost:8000/shopFetch?email=xyz.gmail.com
     ```
 
+### WebHooks
+- Say we want to subscribe some events on 3rd party server side say razorpay SDK
+- So we cant be connected to the server 24x7 
+- So instead we create a webhook 
+- In Webhooks instead of our server fetching info about the events 3rd party server sends payload whenever event is triggered
+- For that we provide our URL and events that we want to subscribe from 3rd party server  
 
 

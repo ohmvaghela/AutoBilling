@@ -25,7 +25,7 @@ const Form = () => {
     e.preventDefault();
     console.log("here");
     setSubmitted(true);
-    const response = await axios.post("http://localhost:8000/addBill", {
+    const Billresponse = await axios.post("http://localhost:8000/addBill", {
       Name,
       Email,
       consumerName,
@@ -34,7 +34,11 @@ const Form = () => {
       billAmount,
       billDescription,
     });
-    console.log(response);
+    const Emailresponse = await axios.post("http://localhost:8000/sendEmail", {
+      email: consumerEmail,
+      id: 1,
+    });
+    console.log([Billresponse,Emailresponse]);
     setLoad("bill");
   };
   const [submitted, setSubmitted] = useState(false);

@@ -76,7 +76,7 @@ export default function DisplayOrder() {
                   </td>
                   <td class="px-6 py-4">
                       <div class="flex items-center">
-                        {order.billStatus===1?<div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>:<div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>} {order.billStatus===1?"paid":"unpaid"}
+                        {order.billStatus===true?<div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>:<div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div>} {order.billStatus===true?"paid":"unpaid"}
                           {/* <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> {order.billStatus===1?"paid":"unpaid"} */}
                       </div>  
                   </td>

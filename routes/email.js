@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
     });
     var mailOptions = {
       from: "seventhfloor860@gmail.com",
-      to: "von10@iitbbs.ac.in",
+      to: "an30@iitbbs.ac.in",
       subject: "Payment Due",
       text: "This is link to make payment http://localhost:8000/payment/" + id,
       attachments: [

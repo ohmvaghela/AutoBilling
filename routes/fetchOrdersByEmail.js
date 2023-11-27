@@ -15,7 +15,7 @@ const fetchOrders = async (req, res) => {
         console.log(["email",email]);
         // const orders = await billSchema.find();
         // const orders = await billSchema.findById("65342506a4f885f158fec8f2")
-        const orders = await billSchema.find({ shopEmail: req.body.email });
+        const orders = await billSchema.find(/*{ shopEmail: req.body.email }*/);
         res.send(orders);
     }catch(e){
         res.send(["error",e]);

@@ -7,6 +7,7 @@ import { createContext, useContext, useState } from 'react';
 import Form from "./Form";
 import DataContext from './context';
 import DisplayOrder from "./DisplayOrder";
+import Profile from "./Profile";
 
 const Dashboard = ({children}) => {
 
@@ -16,8 +17,8 @@ const Dashboard = ({children}) => {
         switch (load) {
             case "bill":
                 return <div className="text-center"><DisplayOrder/></div>;
-            case "setting":
-                return <div className="text-center">Setting</div>;
+            case "profile":
+                return <div className="text-center"><Profile/></div>;
             case "NewBill":
                 return <Form/>;
             default:

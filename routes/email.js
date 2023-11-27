@@ -3,10 +3,21 @@ const express = require("express");
 const router = express.Router();
 // const userSchema = require("../model/userSchema.js");
 // const cookieParser = require("cookie-parser");
+var fs = require('fs');
+// const axios = require("axios");
 
 router.use(express.json());
 
 router.post("/", async (req, res) => {
+  // axios.post(
+  //   "http://localhost:8000/pdfDownload",
+  //   {
+  //     id: req.body.id,
+  //   },
+  //   {
+  //     responseType: "arraybuffer",
+  //   }
+  // );
   const id = req.body.id;
   try {
     var mail = nodemailer.createTransport({
@@ -18,13 +29,13 @@ router.post("/", async (req, res) => {
     });
     var mailOptions = {
       from: "seventhfloor860@gmail.com",
-      to: "ra22@iitbbs.ac.in",
+      to: "von10@iitbbs.ac.in",
       subject: "Payment Due",
       text: "This is link to make payment http://localhost:8000/payment/" + id,
       attachments: [
         {
-          filename: "Hello.txt",
-          path: "./public/datafolder/test.txt",
+          filename: "result.pdf",
+          path: "./public/result.pdf",
         },
       ],
     };
@@ -34,7 +45,10 @@ router.post("/", async (req, res) => {
         console.log(error);
         res.send(error);
       } else {
+        
         console.log("Email sent:" + info.response);
+        var filePath = './public/result.pdf'; 
+        fs.unlinkSync(filePath);
         res.send("Email sent");
       }
     });

@@ -10,7 +10,9 @@ router.post("/", async (req, res) => {
   const loginEmail = req.body.email;
   const url = "http://localhost:5173/home";
   const password = req.body.password;
+  // console.log()
   const doc = await userSchema.findOne({ shopEmail: loginEmail });
+  
   // console.log(cur_route+"doc : "+doc);
   try {
     if(!doc){

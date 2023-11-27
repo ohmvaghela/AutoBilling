@@ -3,6 +3,14 @@ Database password : seventhFloor
 
 >  Add DATABASEURL, SECRET_KEY
 
+# Work FLOW
+
+<center>
+
+<img src="./AutoBilling.drawio.png">
+
+</center>
+
 # Installed
 
 |                       |                                                         |
@@ -81,4 +89,32 @@ Database password : seventhFloor
 - In Webhooks instead of our server fetching info about the events 3rd party server sends payload whenever event is triggered
 - For that we provide our URL and events that we want to subscribe from 3rd party server  
 
+## Changes
+- BillFetch
+- ShopFetch
 
+
+## JWT v/s Session Storage
+
+### Session Storage
+- When client sends inital request it is authorised
+- If request is valid the a session ID is stored in server 
+- This session ID is sent back to client as cookie
+- Now whenever client again sends requests
+    - Server matches it with session key stored in its server
+
+### JWT (JSON Web Token)
+- For inital authorisation it is same as session storage
+- When user is authorised it is encoded using a secret key and sent back to client and token is not stored in server
+- When again client sends request with JWT, server uses secret key and check for JWT 
+- If token matches then server sends appropriate response
+- It consist of 3 parts 
+    1. Header
+    2. Payload
+    3. Signature (Hashed with secret key)
+
+### Session Storage v/s JWT
+- Session ID needs to be stored in a server while JWT is not stored in server.
+- When a client changes server so authorisation is again required as session ID is not present on this server
+- On contrast JWT's secret key is present on all server so it can be easily used to compare token 
+- Hence JWT is scalable

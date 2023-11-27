@@ -68,7 +68,6 @@ userSchema.methods.generateAuthToken = async function(){
         const token = jwt.sign({_id: this._id.toString()}, process.env.SECRET_KEY);
         this.tokens = this.tokens.concat({token:token});
         await this.save();
-        // console.log([cur_route,token]);
         return token;
     }catch(error){
         console.log(cur_route+"auth token not generated");

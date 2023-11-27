@@ -25,7 +25,7 @@ export default function DisplayOrder() {
   return (
     <>
       <h1> Orders</h1>
-      <div className=" flex items-center">
+      <div className=" flex items-center" align="center">
 
         <table className="table-auto">
           <thead>

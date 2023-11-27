@@ -66,7 +66,7 @@ const Navbar = () => {
                   <motion.div className="bg-[#f6f9fc] bg-opacity-90 absolute top-16 right--0.5 px-4 py-3 rounded-xl shadow-md z-10 flex flex-col items-start justify-start gap-4 min-w-[225px] ">
                     {ResourceMenus.map((menu) => (
                       <Link
-                        to={menu.url}
+                        // to={menu.url}
                         key={menu.id}
                         className="text-primaryText font-normal text-sm hover:text-[#0a2540b5] px-2 py-1 w-full rounded-md"
                       >

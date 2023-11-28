@@ -46,7 +46,8 @@ const Emailoptions = async (req) => {
 };
 
 router.post("/", async (req, res) => {
-  const id = req.body.id;
+  // const id = req.body.id;
+  const id = 1;
 
   try {
     // Await the PDF download and email sending

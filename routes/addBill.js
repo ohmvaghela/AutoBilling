@@ -51,8 +51,9 @@ router.post("/", async (req,res)=>{
             billDescription: req.body.billDescription
         });
         const newBill = await bill.save().then((x)=>{
-            console.log("added succesfully");
-            res.send("added succesfully");
+          // console.log(razorpayInstance);  
+          console.log("added succesfully");
+            res.send("bill added succesfully");
             return;
         })
     }catch(err){

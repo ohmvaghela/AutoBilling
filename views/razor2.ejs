@@ -163,25 +163,72 @@
 
 					<td><%=data.cost%></td>
 				</tr>
-				
-				<tr class="item">
-					<td><%=data.Description%></td>
-
-					<td><%=data.cost%></td>
-				</tr>
-				<tr class="item last">
-					<td><%=data.Description%></td>
-
-					<td><%=data.cost%></td>
-				</tr>
-
+			
 				<tr class="total">
 					<td></td>
 
-					<td>Total: <%=3*data.cost%></td>
+					<td>Total: <%=data.cost%></td>
 				</tr>
 			</table>
-				
+			<div>
+				<span>
+					<button id="pay-button" >Pay Now</button>
+				  </span>
+				  <hr />
+				  <!--Inside index.html -->
+				  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+				  <script>
+					document.getElementById("pay-button").onclick = function (e) {
+						  var options = {
+							key: 'rzp_test_MBehv3EgTY8ULU',
+							amount:  100,
+							currency: "INR",
+							name: "Dummy Academy",
+							description: "Pay & Checkout this Course, Upgrade your DSA Skill",
+							image:
+							  "https://media.geeksforgeeks.org/wp-content/uploads/20210806114908/dummy-200x200.png",
+							order_id: "<%= data.orderid %>",
+							//   order_id: "order_MoLLxrlXrcCcTR",
+							handler: function (response) {
+							//   console.log(response);
+							  alert("This step of Payment Succeeded");
+							},
+							prefill: {
+							  //Here we are prefilling random contact
+							  contact: "9876543210",
+							  //name and email id, so while checkout
+							  name: "Twinkle Sharma",
+							  email: "smtwinkle@gmail.com",
+							},
+							notes: {
+							  description: "Best Course for SDE placements",
+							  language:
+								"Available in 4 major Languages JAVA,C/C++, Python, Javascript",
+							  access: "This course have Lifetime Access",
+							},
+							theme: {
+							  color: "#2300a3",
+							},
+						  };
+						  var razorpayObject = new Razorpay(options);
+						//   console.log(razorpayObject);
+						  razorpayObject.on("payment.failed", function (response) {
+							// console.log(response);
+							alert("This step of Payment Failed");
+						  });
+						  razorpayObject.open();
+						  e.preventDefault();
+					   // } else {
+					   //   // Error!
+					   //   console.log("here :", xhr.statusText);
+					   // }
+					  // };
+					};
+				  </script>
+			  
+	
+	
+			</div>			
 		</div>
 		
 	</body>

@@ -118,3 +118,48 @@ Database password : seventhFloor
 - When a client changes server so authorisation is again required as session ID is not present on this server
 - On contrast JWT's secret key is present on all server so it can be easily used to compare token 
 - Hence JWT is scalable
+
+## Razorpay 
+- We are using razorpay SDK for managing payments
+- We initially create a razorpay instance
+    ```js
+    var razorpayInstance = new Razorpay({
+    key_id: KEY_ID,
+    key_secret: KEY_SECRET,
+    });
+    ```
+- This instance will be used to intract with razorpay in future
+- This instance is just a normal JSON object containing id,secret and other info
+
+### Creating order 
+- Razorpay's endpoint `Order` API uses POST request is used to create an order
+```js
+    var options = {
+        amount: a.amount,
+        currency: "INR",
+        receipt: "rcp1",
+        notes: {
+            description: "notes desc",
+            language: " lang",
+            access: "access",
+        },
+    };
+
+    razorpayInstance.orders.create(options, (err, order) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(order);
+      }
+    });
+```
+
+### Order Payment 
+- We are currently using rendering a page everytime payment button is clicked
+- Over there we have a button to initalise payment 
+- A when the button is pressed a razorpay instance is created
+- After that a model is created using the checkout script provided by razorpay
+- And the response is logged 
+
+### Whenever we use billFetch 
+- It fetches all bills from razorpay and mongoDB and compares then if the status is success or remaining and the same is displayed

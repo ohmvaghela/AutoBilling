@@ -1,18 +1,23 @@
-const express = require("express")
-var cors = require("cors");
 
-require("./connect");
+const express = require("express");
 const app = express();
 const ejs = require("ejs");
-app.use(express.static('public'));
-app.set("view engine","ejs");
 const path = require("path");
+require("dotenv").config();
+const auth = require("./routes/auth.js");
 
-app.use(cors({
-  origin:"*"
-}));
+var cors = require("cors");
+const cron = require("node-cron");
+app.use(express.static('public'));
+app.use(express.json());
+app.use(cors({origin:"*"}));
 
 app.set("view engine","ejs");
+
+require("./connect");
+
+
+
 
 const addUserRouter = require("./routes/addUser.js");
 app.use("/addUser",addUserRouter);
@@ -49,5 +54,12 @@ app.use("/payment",paymentRouter);
 
 const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
 app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
+
+const schedular = require('./routes/sehedular.js');
+// console.log(schedular());
+
+cron.schedule("0 0 * * *", () => {
+    schedular();
+});
 
 app.listen(8000);

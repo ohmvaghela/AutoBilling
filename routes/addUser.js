@@ -38,9 +38,9 @@ router.post("/",async (req,res)=>{
     }
 });
 
-router.get("/", async(req,res)=>{
-    const d = await userSchema.find();
-    res.send(d);
-})
+// router.get("/", async(req,res)=>{
+//     const d = await userSchema.find();
+//     res.send(d);
+// })
 
 module.exports = router;

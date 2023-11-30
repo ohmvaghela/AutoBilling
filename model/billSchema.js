@@ -41,6 +41,16 @@ const billSchema = new mongoose.Schema({
         type:Boolean,
         require: true,
         default: false,
+    },
+    reminder:{
+        type: Number,
+        require: true,
+        default: 7,
+    },
+    remdinderDate:{
+        type: Date,
+        require: true,
+        default: Date.now() + 7 * 24 * 60 * 60 * 1000,
     }
 })
 

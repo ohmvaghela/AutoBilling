@@ -163,3 +163,57 @@ Database password : seventhFloor
 
 ### Whenever we use billFetch 
 - It fetches all bills from razorpay and mongoDB and compares then if the status is success or remaining and the same is displayed
+
+## Mailing
+- SMTP (Simple Mail Transfer Protocal)
+- POP3 (Post Office Protocol)
+- IMAP (Internet Message Access Protocol) 
+- SMTP is used for sending mail 
+- When we click on send mail so the mail is sent to over mail server using SMTP
+- Then it is sent to the reciever's mail server using SMTP
+- Then user's email fetches those mails using POP3 or IMAP
+- In IMAP : we can access email using email server we cannot download to local machine 
+- In POP3 : It downloads emails to local machines and then it is removed from the email server
+- IMAP is most widely used
+- <img src="./SMTP.webp">
+
+## NodeMailer
+- Gmail has OAuth2 : `Open Authorization` for protections against spammers
+- So we cant directly send mail
+- Hence gmail came up with allow plain userid and password for less secure apps
+    - These apps need to be added to gmail
+- Other way is using app specific password which is used in our case
+
+## JWT
+- Contains 3 parts seperated by `.` 
+    1. Hashing algo
+    2. Payload
+    3. Hash with secret key
+- Base 64 encoded
+- When server recieve JWT it compares it with secret key
+    - It uses First and second part and adds secret key to it and then hashes it 
+    - If the hash matches with the 3rd part then payload is verified
+
+
+## Scheduled Email sender
+- node-cron is used to send periodic mail
+- Upadtes in billschema
+```js
+    reminder:{
+        type: Number,
+        require: true,
+        default: 7,
+    },
+    remdinderDate:{
+        type: Date,
+        require: true,
+        default: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    }
+```
+- If expirey date exceeds then send bill each day
+```js
+cron.schedule("0 0 * * *", () => {
+    schedular();
+});
+```
+- Above function checks if the checks the bills whose reminder period is over and we need to send email to them

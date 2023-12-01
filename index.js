@@ -16,9 +16,6 @@ app.set("view engine","ejs");
 
 require("./connect");
 
-
-
-
 const addUserRouter = require("./routes/addUser.js");
 app.use("/addUser",addUserRouter);
 

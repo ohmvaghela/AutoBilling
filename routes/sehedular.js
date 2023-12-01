@@ -18,7 +18,7 @@ const sendEmailsForExceededReminders = async () => {
 
     for (const bill of exceededReminderBills) {
         try {
-            await axios.get('http://localhost:8000/Email', {
+            await axios.get('http://localhost:8000/sendEmail', {
                 id: bill.billID,
             });
         } catch (error) {

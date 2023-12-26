@@ -1,8 +1,3 @@
-Database password : seventhFloor
-> # Always use `git pull` before making changes then push
-
->  Add DATABASEURL, SECRET_KEY
-
 # Work FLOW
 
 <center>

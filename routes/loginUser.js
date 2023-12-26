@@ -7,14 +7,17 @@ const cookieParser = require("cookie-parser");
 router.use(express.json());
 const cur_route = "loginUser : ";
 router.post("/", async (req, res) => {
-  const loginEmail = req.body.loginEmail;
+  const loginEmail = req.body.email;
+  const url = "http://localhost:5173/home";
   const password = req.body.password;
+  // console.log()
   const doc = await userSchema.findOne({ shopEmail: loginEmail });
+  
   // console.log(cur_route+"doc : "+doc);
   try {
     if(!doc){
       console.log(cur_route + "user not found");
-      res.send("user not found");
+      res.status(404).send("user not found");
     }
     else{
       const passmatch = await bcrypt.compare(password, doc.password);
@@ -28,14 +31,13 @@ router.post("/", async (req, res) => {
         });
       }
       if (doc && passmatch) {
-        res.send(doc);
+        res.status(200).send("login success");
       } else {
         throw "Password is incorrect";
       }
-      
     }
   } catch (e) {
-    res.send(e);
+    res.status(400).send(e);
   }
 });
 

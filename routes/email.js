@@ -13,13 +13,13 @@ const Emailoptions = async (req) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "seventhfloor860@gmail.com",
-        pass: "fatu qfro vciz rown",
+        user: "ohmvaghela@gmail.com",
+        pass: "mnun xtvb taww nwrw",
       },
     });
 
     const mailOptions = {
-      from: "seventhfloor860@gmail.com",
+      from: "ohmvaghela@gmail.com",
       to: req.body.email,
       subject: "Payment Due",
       text: "This is link to make payment http://localhost:8000/payment/" + req.body.id,

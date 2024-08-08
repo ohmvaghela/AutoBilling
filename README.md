@@ -1,3 +1,8 @@
+# Setting Up
+- Add .env file
+- run "npm i"
+- run "nodemon index.js"
+
 # Work FLOW
 
 <center>

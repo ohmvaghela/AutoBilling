@@ -20,8 +20,8 @@ const fetchOrders = async (req,res)=>{
             orders.items.forEach((items)=>{
                 ids.push(items.id);
             })
-            res.send(orders);
-            // res.send(ids);
+            // res.send(orders);
+            res.send(ids);
         }
         else{
             res.send(err);

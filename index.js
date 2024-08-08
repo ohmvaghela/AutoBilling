@@ -52,11 +52,12 @@ app.use("/payment",paymentRouter);
 const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
 app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
 
-const schedular = require('./routes/sehedular.js');
-// console.log(schedular());
+// const schedular = require('./routes/sehedular.js');
+// // console.log(schedular());
 
-cron.schedule("0 0 * * *", () => {
-    schedular();
-});
+// cron.schedule("* * * * *", () => {
+//     schedular();
+//     console.log("crons ran")
+// });
 
 app.listen(8000);

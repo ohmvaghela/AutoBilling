@@ -1,3 +1,7 @@
+# Tasks
+- Change CSS lib
+  - Use modules in css to assign different CSS to different pages
+
 ### List of all tasks
 
 - Sending mail at fixed intervals of time
@@ -13,3 +17,4 @@
   - Bills and it's filter
 - Individual bill table
 - Pricing
+

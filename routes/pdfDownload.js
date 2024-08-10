@@ -16,7 +16,8 @@ const puppeteer = require("puppeteer");
 async function exportWebsiteAsPdf(websiteUrl, outputPath) {
   // Create a browser instance
   const browser = await puppeteer.launch({
-    headless: "new",
+    // headless: "new",
+    headless: true,
   });
 
   // Create a new page

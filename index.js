@@ -4,10 +4,10 @@ const app = express();
 const ejs = require("ejs");
 const path = require("path");
 require("dotenv").config();
-const auth = require("./routes/auth.js");
+// const auth = require("./routes/auth.js");
 
-var cors = require("cors");
-const cron = require("node-cron");
+// var cors = require("cors");
+// const cron = require("node-cron");
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cors({origin:"*"}));
@@ -52,12 +52,13 @@ app.use("/payment",paymentRouter);
 const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
 app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
 
-// const schedular = require('./routes/sehedular.js');
-// // console.log(schedular());
-
-// cron.schedule("* * * * *", () => {
-//     schedular();
-//     console.log("crons ran")
-// });
+/* crons schedular
+const schedular = require('./routes/sehedular.js');
+// console.log(schedular());
+cron.schedule("* * * * *", () => {
+    schedular();
+//    console.log("crons ran")
+});
+*/
 
 app.listen(8000);

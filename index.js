@@ -1,7 +1,7 @@
 
 const express = require("express");
 const app = express();
-// const ejs = require("ejs");
+const ejs = require("ejs");
 const path = require("path");
 require("dotenv").config();
 // const auth = require("./routes/auth.js");
@@ -37,14 +37,14 @@ app.use("/loginUser",loginRouter);
 // const emailRouter = require("./routes/email.js");
 // app.use("/sendEmail",emailRouter);
 
-// const razorRouter = require("./routes/razor.js");
-// app.use("/razor",razorRouter);
+const razorRouter = require("./routes/razor.js");
+app.use("/razor",razorRouter);
 
-// const fetchOrders = require("./routes/fetchOrders.js");
-// app.use("/fetchOrders",fetchOrders);
+const fetchOrders = require("./routes/fetchOrders.js");
+app.use("/fetchOrders",fetchOrders);
 
-// const paymentRouter = require("./routes/payment.js");
-// app.use("/payment",paymentRouter);
+const paymentRouter = require("./routes/payment.js");
+app.use("/payment",paymentRouter);
 
 // const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
 // app.use("/fetchOrdersByEmail",fetchOrdersByEmail);

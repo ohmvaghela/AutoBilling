@@ -3,11 +3,13 @@ const express = require("express");
 const app = express();
 const ejs = require("ejs");
 const path = require("path");
+var cors = require("cors");
 require("dotenv").config();
 // const auth = require("./routes/auth.js");
 
 app.use(express.static('public'));
 app.use(express.json());
+app.use(cors({origin:"*"}));
 
 app.set("view engine","ejs");
 
@@ -49,4 +51,4 @@ app.use("/payment",paymentRouter);
 // const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
 // app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
 
-app.listen(8000);
+app.listen(8008);

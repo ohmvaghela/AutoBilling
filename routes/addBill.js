@@ -14,7 +14,7 @@ var razorpayInstance = new Razorpay({
 const createOrder = (a) => {
   return new Promise((resolve, reject) => {
     var options = {
-      amount: a.amount,
+      amount: a.amount*100,
       currency: "INR",
       receipt: "rcp1",
       notes: {
@@ -23,7 +23,6 @@ const createOrder = (a) => {
         access: "access",
       },
     };
-
     razorpayInstance.orders.create(options, (err, order) => {
       if (err) {
         reject(err);
@@ -41,6 +40,7 @@ router.post("/", async (req,res)=>{
     try{
         var order = await createOrder({amount:req.body.billAmount});
         orderid = order.id;
+        console.log(req.body);
         const bill = new billSchema({
             billID : billno,
             orderId : orderid,

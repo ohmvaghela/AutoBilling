@@ -8,36 +8,47 @@ router.use(express.json());
 const cur_route = "loginUser : ";
 router.post("/", async (req, res) => {
   const loginEmail = req.body.email;
-  const url = "http://localhost:5173/home";
   const password = req.body.password;
-  // console.log()
-  const doc = await userSchema.findOne({ shopEmail: loginEmail });
-  
-  // console.log(cur_route+"doc : "+doc);
+
+  const userData = await userSchema.findOne({ shopEmail: loginEmail });
+
+  // new login, no token exist
   try {
-    if(!doc){
+    // user not found in database
+    if (!userData) {
       console.log(cur_route + "user not found");
       res.status(404).send("user not found");
-    }
-    else{
-      const passmatch = await bcrypt.compare(password, doc.password);
-      if (passmatch) {
-        // console.log(cur_route+"hi")
-        const token = await doc.generateAuthToken();
-        // console.log(cur_route+token);
-        res.cookie("jwt", token, {
-          expires: new Date(Date.now() + 60000),
-          httpOnly: true,
-        });
+    } else {
+      // user found
+      const sharableUserData = {
+        shopID:9,
+        shopEmail:userData.shopEmail,
+        shopName :userData.shopName,
+        firstName:userData.firstName,
+        lastName :userData.lastName,
       }
-      if (doc && passmatch) {
-        res.status(200).send("login success");
+      const passmatch = await bcrypt.compare(password, userData.password);
+      if (passmatch) {
+        // password matches
+        // generate access token
+        const token = await userData.generateAuthToken();
+        //generate refresh token
+        const refreshToken = await userData.generateRefreshToken();
+        console.log(refreshToken);
+        res.cookie("jwt", refreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production', 
+          secure:false
+        });
+
+        res.status(200).send({token:token,user:sharableUserData});
       } else {
-        throw "Password is incorrect";
+        // password dont match
+        res.status(200).send("Incorrect password");
       }
     }
   } catch (e) {
-    res.status(400).send(e);
+    res.send(400).send(e);
   }
 });
 

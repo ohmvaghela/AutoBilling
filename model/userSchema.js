@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 // const validator = require("validator");
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const billSchema = require('./billSchema');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const billSchema = require("./billSchema");
 
-require('mongoose-type-email');
-
+require("mongoose-type-email");
 
 const cur_route = "userSchema : ";
 const userSchema = new mongoose.Schema({
@@ -41,16 +40,10 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   // used to track login history
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  tokens:{
+    type:String
+  },
 });
-
 
 /**
 For normal JS object we can use prototype
@@ -63,17 +56,39 @@ Eg : Object :
     userSchema.methods.sayHi = function(){}
 
 */
-userSchema.methods.generateAuthToken = async function(){
-    try{
-        const token = jwt.sign({_id: this._id.toString()}, process.env.SECRET_KEY);
-        this.tokens = this.tokens.concat({token:token});
-        await this.save();
-        return token;
-    }catch(error){
-        console.log(cur_route+"auth token not generated");
-        // res.send("the error part" + error);
-    }
-}
+userSchema.methods.generateAuthToken = async function () {
+  try {
+    const token = jwt.sign(
+      { _id: this._id.toString() },
+      process.env.SECRET_KEY,
+      {expiresIn: '30sec'}//expirey time 1min
+    );
+
+    return token;
+  } catch (error) {
+    console.log(cur_route + "auth token not generated");
+    // res.send("the error part" + error);
+  }
+};
+
+userSchema.methods.generateRefreshToken = async function ()  {
+  try {
+    const refreshToken = jwt.sign(
+      { _id: this._id.toString() },
+      process.env.SECRET_KEY,
+      {expiresIn: '1 day'}//expirey time 1min
+    );
+    // save the token if req
+    // this.tokens = this.tokens.concat({token:refreshToken});
+    this.tokens = refreshToken;
+    await this.save();
+    console.log(cur_route+"refresh token generated and saved");
+    return refreshToken;
+  }catch(e){
+    console.log(cur_route+"refresh token error",e);
+    res.send(cur_route+e);
+  }
+};
 /*
  pre is a middleware
 trigeer a pre hook before "..."
@@ -84,12 +99,12 @@ other middleware are :-
   - "remove" : runs before removing a doc from collection
   - "updateOne", "updateMany", "findOneAndUpdate" : runs before updating
   - "init" : runs before initializing a new document
-*/ 
-userSchema.pre("save", async function(next) {
-  if(this.isModified("password")){
+*/
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
   }
   next();
-})
+});
 
-module.exports = mongoose.model("users",userSchema);
+module.exports = mongoose.model("users", userSchema);

@@ -3,40 +3,53 @@ const express = require("express");
 const router = express.Router();
 // const userSchema = require("../model/userSchema.js");
 // const cookieParser = require("cookie-parser");
-var fs = require('fs');
+var fs = require("fs");
 const axios = require("axios");
+const ejs = require("ejs");
+const path = require("path");
 
 router.use(express.json());
+
+const data = {
+  name: "Alison Burgers",
+  logo: "./iit.png",
+  companyLocaction: ` 8358 Sunset Blvd, West Hollywood, CA 90069, United States`,
+  buyerLocaction: `Los Angeles, CA, United States `,
+  email: "xyz@ele.works.in",
+  buyerName: "Walter White",
+  companyName: "ElectroChemical Works",
+  invoiceID: 1234,
+  dueDate: Date.now().toString(),
+  curDate: Date.now().toString(),
+  Description: "Material : Aluminum",
+  cost: 15000,
+  header: "electrochemical works",
+};
 
 const Emailoptions = async (req) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "ohmvaghela@gmail.com",
-        pass: "mnun xtvb taww nwrw",
+        user: "autobilling4@gmail.com",
+        pass: "embo wtdz sndp iquz",
       },
     });
-
+    const htmlContent = await ejs.renderFile(
+      path.join(__dirname, "../views", "bill.ejs"),
+      { data: data }
+    );
     const mailOptions = {
-      from: "ohmvaghela@gmail.com",
+      from: "autobilling4@gmail.com",
       to: req.body.email,
       subject: "Payment Due",
-      text: "This is link to make payment http://localhost:8000/payment/" + req.body.id,
-      attachments: [
-        {
-          filename: "result.pdf",
-          path: "./public/result.pdf",
-        },
-      ],
+      html: htmlContent,
     };
 
     // Send the email using a Promise-based approach
     await transporter.sendMail(mailOptions);
 
-    // Delete the result.pdf file after sending the email
-    const filePath = "./public/result.pdf";
-    fs.unlinkSync(filePath);
+
     console.log("Email sent successfully");
     return "Email sent";
   } catch (err) {
@@ -51,15 +64,15 @@ router.post("/", async (req, res) => {
 
   try {
     // Await the PDF download and email sending
-    await axios.get('http://localhost:8000/pdfDownload', {
-      id: req.body.id, // Replace 'yourData' with your actual data
-    });
+    // await axios.get("http://localhost:8000/pdfDownload", {
+    //   id: req.body.id, // Replace 'yourData' with your actual data
+    // });
     const emailStatus = await Emailoptions(req);
 
     // Send the response with the email status
     res.send(["response", emailStatus]);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     res.send(error);
   }
 });

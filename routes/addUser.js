@@ -18,19 +18,30 @@ router.post("/",async (req,res)=>{
             shopEmail : req.body.email,
             password: req.body.password
         });
+        const sharableUserData = {
+            shopID : size,
+            shopName : req.body.name,
+            firstName : req.body.firstname,
+            lastName : req.body.lastname,
+            shopEmail : req.body.email,
+        }
         const token = await user.generateAuthToken();
+        const refreshToken = await user.generateRefreshToken();
         const newUser = await user.save().then((x)=>{
-            // console.log(cur_route+x);
-            res.cookie("jwt", token, {
-                expires: new Date(Date.now() + 60000),
-                httpOnly: true,
-              });
             console.log(cur_route+"user added succesfully");
-            res.send("added succesfully");
-            return;
+            res.cookie("jwt", refreshToken,{
+                httpOnly: true,
+            });
+            res.status(200).send({token:token,user:sharableUserData});
         }).catch((err)=>{
-            console.log(cur_route+"user not added");
-            res.send(["user not added server error : ",err])
+            if(err.code === 11000){
+                console.log(cur_route+"duplicate key found : ",err.keyPattern);
+                res.send([false,"User already exist : ",err.keyPattern])
+            }
+            else{
+                console.log(cur_route+"user not added");
+                res.send([false,"Fail to add user : ",err])
+            }
         });
     }catch(err){
         console.log([cur_route,err]);
@@ -38,9 +49,6 @@ router.post("/",async (req,res)=>{
     }
 });
 
-// router.get("/", async(req,res)=>{
-//     const d = await userSchema.find();
-//     res.send(d);
-// })
+
 
 module.exports = router;

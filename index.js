@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // Your frontend URL
+    origin: '*', // Your frontend URL
     credentials: true, // Allow credentials
     allowedHeaders: ['auth-token', 'Content-Type'],
   };
@@ -55,25 +55,16 @@ app.use("/sendEmail",emailRouter);
 const razorRouter = require("./routes/razor.js");
 app.use("/razor",razorRouter);
 
-// const fetchOrders = require("./routes/fetchOrders.js");
-// app.use("/fetchOrders",validateToken,fetchOrders);
 const fetchOrders = require("./routes/fetchOrders.js");
-app.use("/fetchOrders",fetchOrders);
+app.use("/fetchOrders",validateToken,fetchOrders);
 
 const fetchRazorPayOrder = require("./routes/fetchRazorPayOrder.js");
 app.use("/fetchRazorPayOrder",fetchRazorPayOrder);
 
 const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
 app.use("/fetchOrdersByEmail",validateToken,fetchOrdersByEmail);
-// const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
-// app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
 
 const paymentRouter = require("./routes/payment.js");
 app.use("/payment",paymentRouter);
-
-
-
-// const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
-// app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
 
 app.listen(8000);

@@ -16,7 +16,7 @@ const fetchOrders = async (req, res) => {
     const orders = await billSchema.find({ shopEmail: email });
     const fetchOrderPromises = orders.map(async (order) => {
       try {
-        const { data } = await axios.post("http://localhost:8000/fetchRazorPayOrder", {
+        const { data } = await axios.post("https://autobilling-gu29.onrender.com/fetchRazorPayOrder", {
           orderId: order.orderId,
         });
         console.log(data.id,data.status);

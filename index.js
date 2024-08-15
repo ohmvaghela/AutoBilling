@@ -40,8 +40,8 @@ app.use("/userData",validateToken,getUserData);
 const pdfRouter = require("./routes/pdfCreate.js");
 app.use("/pdfCreate",pdfRouter);
 
-const downRouter = require("./routes/pdfDownload.js");
-app.use("/pdfDownload", downRouter);
+// const downRouter = require("./routes/pdfDownload.js");
+// app.use("/pdfDownload", downRouter);
 
 const updateBill = require("./routes/billFetch.js");
 app.use("/billFetch",updateBill);

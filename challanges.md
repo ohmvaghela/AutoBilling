@@ -13,5 +13,4 @@
 
 # TODO
 - Web socket for razorpay
-- Change the HTML in send reminder
 - Add payment button on bills sent 

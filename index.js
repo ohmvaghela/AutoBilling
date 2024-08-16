@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // Your frontend URL
+    origin: process.env.FRONTEND_URL, // Your frontend URL
     credentials: true, // Allow credentials
     allowedHeaders: ['auth-token', 'Content-Type'],
   };
@@ -40,8 +40,8 @@ app.use("/userData",validateToken,getUserData);
 const pdfRouter = require("./routes/pdfCreate.js");
 app.use("/pdfCreate",pdfRouter);
 
-const downRouter = require("./routes/pdfDownload.js");
-app.use("/pdfDownload", downRouter);
+// const downRouter = require("./routes/pdfDownload.js");
+// app.use("/pdfDownload", downRouter);
 
 const updateBill = require("./routes/billFetch.js");
 app.use("/billFetch",updateBill);

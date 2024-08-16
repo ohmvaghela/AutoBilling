@@ -8,32 +8,33 @@ router.use(express.json());
 
 const fetchOrders = async (req, res) => {
   try {
-    const email = req.body;
-    console.log(["qurey", req.query]);
+    const email = req.body.shopEmail;
+    console.log(["query", req.query]);
     console.log(["body", JSON.stringify(req.body)]);
     console.log(["email", email]);
-    // const orders = await billSchema.find();
-    // const orders = await billSchema.findById("65342506a4f885f158fec8f2")
-    const orders = await billSchema.find({ shopEmail: req.body.shopEmail });
-    const fetchOrderPromises = orders.map((order) =>
-      axios
-        .post("http://localhost:8000/fetchRazorPayOrder", {
+
+    const orders = await billSchema.find({ shopEmail: email });
+    const fetchOrderPromises = orders.map(async (order) => {
+      try {
+        const { data } = await axios.post("https://autobilling-gu29.onrender.com/fetchRazorPayOrder", {
           orderId: order.orderId,
-        })
-        .then((data) => {
-          if (data.amount_due === 0) {
-            order.billStatus = true;
-          }
-        })
-        .catch((err) => {
-          console.log("razor-mongo-bill error: ", order.orderId);
-        })
-    );
+        });
+        console.log(data.id,data.status);
+        if (data.status === "paid") {
+          order.billStatus = true;
+          await order.save(); // Save the updated order back to the database
+        }
+      } catch (err) {
+        console.log("razor-mongo-bill error: ", order.orderId, err);
+      }
+    });
+
     await Promise.all(fetchOrderPromises);
 
     console.log("fetchOrdersbyEmail:", orders);
     res.send(orders);
   } catch (e) {
+    console.log("fetchOrders error: ", e);
     res.send(["error", e]);
   }
 };

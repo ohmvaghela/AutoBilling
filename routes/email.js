@@ -11,19 +11,15 @@ const path = require("path");
 router.use(express.json());
 
 const data = {
-  name: "Alison Burgers",
-  logo: "./iit.png",
-  companyLocaction: ` 8358 Sunset Blvd, West Hollywood, CA 90069, United States`,
-  buyerLocaction: `Los Angeles, CA, United States `,
-  email: "xyz@ele.works.in",
-  buyerName: "Walter White",
-  companyName: "ElectroChemical Works",
-  invoiceID: 1234,
-  dueDate: Date.now().toString(),
-  curDate: Date.now().toString(),
-  Description: "Material : Aluminum",
-  cost: 15000,
-  header: "electrochemical works",
+  billId: '26',
+  orderId: 'order_0ko9jxfujivqXV',
+  consumerName: 'Ohm Vaghela',
+  consumerEmail: 'vaghelaohm@gmail.com',
+  shopEmail: 'xyz@gmail.com',
+  dateTime: '2024-08-14T14:12:11.656+00:00',
+  billAmount: 5000,
+  billDescription: 'nothing',
+  billStatus: false
 };
 
 const Emailoptions = async (req) => {
@@ -41,9 +37,9 @@ const Emailoptions = async (req) => {
     );
     const mailOptions = {
       from: "autobilling4@gmail.com",
-      to: req.body.email,
+      to: req.body.consumerEmail,
       subject: "Payment Due",
-      html: htmlContent,
+      text: `Please pay the bill using the following link: https://autobilling-gu29.onrender.com/${req.body._id}`,
     };
 
     // Send the email using a Promise-based approach
@@ -61,7 +57,7 @@ const Emailoptions = async (req) => {
 router.post("/", async (req, res) => {
   // const id = req.body.id;
   const id = 1;
-
+  req.body = req.body.User;
   try {
     // Await the PDF download and email sending
     // await axios.get("http://localhost:8000/pdfDownload", {

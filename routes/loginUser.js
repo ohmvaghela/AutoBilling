@@ -38,7 +38,8 @@ router.post("/", async (req, res) => {
         res.cookie("jwt", refreshToken, {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production', 
-          secure:false
+          // secure: true, // Ensure this is true for HTTPS
+          sameSite: 'None', // Must be 'None' to allow cross-site requests
         });
 
         res.status(200).send({token:token,user:sharableUserData});

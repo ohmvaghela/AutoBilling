@@ -50,7 +50,7 @@ const shopFetch = require("./routes/shopFetch.js");
 app.use("/shopFetch",shopFetch);
 
 const emailRouter = require("./routes/email.js");
-app.use("/sendEmail",emailRouter);
+app.use("/sendEmail",validateToken,emailRouter);
 
 const razorRouter = require("./routes/razor.js");
 app.use("/razor",razorRouter);
@@ -58,7 +58,7 @@ app.use("/razor",razorRouter);
 // const fetchOrders = require("./routes/fetchOrders.js");
 // app.use("/fetchOrders",validateToken,fetchOrders);
 const fetchOrders = require("./routes/fetchOrders.js");
-app.use("/fetchOrders",fetchOrders);
+app.use("/fetchOrders",validateToken,fetchOrders);
 
 const fetchRazorPayOrder = require("./routes/fetchRazorPayOrder.js");
 app.use("/fetchRazorPayOrder",fetchRazorPayOrder);

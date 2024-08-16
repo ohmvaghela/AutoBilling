@@ -14,7 +14,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: '*', // Your frontend URL
+    origin: process.env.FRONTEND_URL, // Your frontend URL
+
     credentials: true, // Allow credentials
     allowedHeaders: ['auth-token', 'Content-Type'],
   };
@@ -50,7 +51,7 @@ const shopFetch = require("./routes/shopFetch.js");
 app.use("/shopFetch",shopFetch);
 
 const emailRouter = require("./routes/email.js");
-app.use("/sendEmail",emailRouter);
+app.use("/sendEmail",validateToken,emailRouter);
 
 const razorRouter = require("./routes/razor.js");
 app.use("/razor",razorRouter);

@@ -39,7 +39,7 @@ const Emailoptions = async (req) => {
       from: "autobilling4@gmail.com",
       to: req.body.consumerEmail,
       subject: "Payment Due",
-      text: `Please pay the bill using the following link: https://autobilling-gu29.onrender.com/${req.body._id}`,
+      text: `Please pay the bill using the following link: https://autobilling-gu29.onrender.com/pdfCreate/${req.body._id}`,
     };
 
     // Send the email using a Promise-based approach

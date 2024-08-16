@@ -15,6 +15,7 @@ app.use(cookieParser());
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL, // Your frontend URL
+
     credentials: true, // Allow credentials
     allowedHeaders: ['auth-token', 'Content-Type'],
   };
@@ -55,8 +56,6 @@ app.use("/sendEmail",validateToken,emailRouter);
 const razorRouter = require("./routes/razor.js");
 app.use("/razor",razorRouter);
 
-// const fetchOrders = require("./routes/fetchOrders.js");
-// app.use("/fetchOrders",validateToken,fetchOrders);
 const fetchOrders = require("./routes/fetchOrders.js");
 app.use("/fetchOrders",validateToken,fetchOrders);
 
@@ -65,15 +64,8 @@ app.use("/fetchRazorPayOrder",fetchRazorPayOrder);
 
 const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
 app.use("/fetchOrdersByEmail",validateToken,fetchOrdersByEmail);
-// const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
-// app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
 
 const paymentRouter = require("./routes/payment.js");
 app.use("/payment",paymentRouter);
-
-
-
-// const fetchOrdersByEmail = require("./routes/fetchOrdersByEmail.js");
-// app.use("/fetchOrdersByEmail",fetchOrdersByEmail);
 
 app.listen(8000);

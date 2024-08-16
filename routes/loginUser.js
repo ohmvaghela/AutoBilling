@@ -39,6 +39,7 @@ router.post("/", async (req, res) => {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production', 
           // secure: true, // Ensure this is true for HTTPS
+          expires: new Date(Date.now() + 8 * 3600000), // 8 hours
           sameSite: 'None', // Must be 'None' to allow cross-site requests
         });
 

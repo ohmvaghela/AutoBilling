@@ -6,6 +6,7 @@
 4. Arrow function and normal functions are different
     - Arrow function do not have their own object so we cannot use `this` keyword in arrow function
     - This caused error while creating refresh token 
+5. Not found on refresh
 
 # Remeber
 - Change all the REST calls from client to depolyed server from local host

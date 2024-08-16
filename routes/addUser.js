@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
         res.cookie("jwt", refreshToken, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
-          // secure: true, // Ensure this is true for HTTPS
+          expires: new Date(Date.now() + 8 * 3600000), // 8 hours
           sameSite: "None", // Must be 'None' to allow cross-site requests
         });
         res.status(200).send({ token: token, user: sharableUserData });

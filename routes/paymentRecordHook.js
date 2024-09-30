@@ -15,7 +15,7 @@ const logRazorPayment = async (req, res) => {
         console.log('Webhook verified');
         const bill = await findBillByOrderId(req.body.payload.payment.entity.order_id);
         if (bill) {
-            bill.status = true;
+            bill.billStatus = true;
             await bill.save();
             console.log('Bill status updated to true:', bill);
             res.status(200).send('Webhook received');

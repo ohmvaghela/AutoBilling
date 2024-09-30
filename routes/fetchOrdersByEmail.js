@@ -14,24 +14,8 @@ const fetchOrders = async (req, res) => {
     console.log(["email", email]);
 
     const orders = await billSchema.find({ shopEmail: email });
-    const fetchOrderPromises = orders.map(async (order) => {
-      try {
-        const { data } = await axios.post(`${BACKEND_URL}/fetchRazorPayOrder`, {
-          orderId: order.orderId,
-        });
-        console.log(data.id,data.status);
-        if (data.status === "paid") {
-          order.billStatus = true;
-          await order.save(); // Save the updated order back to the database
-        }
-      } catch (err) {
-        console.log("razor-mongo-bill error: ", order.orderId, err);
-      }
-    });
 
-    await Promise.all(fetchOrderPromises);
-
-    console.log("fetchOrdersbyEmail:", orders);
+    // console.log("fetchOrdersbyEmail:", orders);
     res.send(orders);
   } catch (e) {
     console.log("fetchOrders error: ", e);

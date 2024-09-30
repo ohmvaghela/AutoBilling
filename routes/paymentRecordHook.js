@@ -6,7 +6,6 @@ const crypto = require('crypto');
 
 const logRazorPayment = async (req,res) => {
   const secret = KEY_SECRET;
-  console.log("logRazorPayment");
   const shasum = crypto.createHmac('sha256', secret);
   shasum.update(JSON.stringify(req.body));
   const digest = shasum.digest('hex');
@@ -14,6 +13,8 @@ const logRazorPayment = async (req,res) => {
   if (digest === req.headers['x-razorpay-signature']) {
       console.log('Webhook verified');
       console.log(req.body);
+      console.log(req.body.payload.payment.entity);
+
       res.status(200).send('Webhook received');
   } else {
       console.log('Webhook verification failed');

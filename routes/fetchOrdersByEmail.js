@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const billSchema = require("../model/billSchema");
 const axios = require("axios");
-
+const { BACKEND_URL } = process.env;
 router.use(express.json());
 
 const fetchOrders = async (req, res) => {
@@ -16,7 +16,7 @@ const fetchOrders = async (req, res) => {
     const orders = await billSchema.find({ shopEmail: email });
     const fetchOrderPromises = orders.map(async (order) => {
       try {
-        const { data } = await axios.post("https://autobilling-gu29.onrender.com/fetchRazorPayOrder", {
+        const { data } = await axios.post(`${BACKEND_URL}/fetchRazorPayOrder`, {
           orderId: order.orderId,
         });
         console.log(data.id,data.status);

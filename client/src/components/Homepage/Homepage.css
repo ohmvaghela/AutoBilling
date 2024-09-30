@@ -1,0 +1,69 @@
+@import url('../../index.css');
+
+.half_div {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.half_div img {
+    width: 50%;
+    height: auto;
+    transform: scale(80%);
+}
+
+.half_div div {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.half_div .text_container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px;
+    color: rgb(10, 37, 64);
+}
+
+.half_div .text_container h1 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.half_div .text_container h1 .highlight {
+    color: rgb(255, 255, 255);
+    font-weight: 800;
+}
+
+.half_div .text_container h1 .subtle {
+    color: rgb(10, 37, 64);
+    font-weight: 800;
+}
+
+.half_div .text_container p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.half_div .text_container button {
+    padding: 15px 30px;
+    font-size: 1.25rem;
+    background-color: rgb(21, 190, 83) !important;
+    border-color: rgb(21, 190, 83) !important;
+     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border-radius: 3rem;
+}
+
+.half_div .text_container button:hover {
+    transition-duration: 0.2s;
+    background-color: rgb(3, 32, 14)!important;
+    border-color:rgb(3, 32, 14)!important;
+}
+

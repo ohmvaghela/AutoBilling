@@ -1,0 +1,55 @@
+@import url('../../index.css');
+
+.navbar {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 15px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    /* padding: 10px 10px;  */
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+}
+
+
+.right {
+    color: rgb(31, 30, 30); 
+}
+.flex-container{
+    display: flex;
+    color:rgb(37, 37, 37)!important;
+    flex-direction: row;
+    font-size: large;
+    font-weight: bold;
+}
+
+.flex-item{
+    margin-left:3rem;
+    color:rgb(37, 37, 37)!important;
+    text-decoration: none;
+    font-size: large;
+    font-weight:800;
+}
+.flex-item:hover{
+    
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.Signin_Signup {
+    background-color: rgb(21, 190, 83) !important;
+    border-color: rgb(21, 190, 83) !important;
+    border-radius: 1.5rem !important;
+    font-size: large!important;
+    font-weight: bold!important;
+    position: relative; 
+}
+.Signin_Signup:hover  {
+    transition-duration: 0.2s;
+    background-color: rgb(3, 32, 14)!important;
+    border-color:rgb(3, 32, 14)!important;
+
+}

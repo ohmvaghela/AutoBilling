@@ -1,0 +1,196 @@
+.base_table {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    justify-self: stretch;
+}
+.cus_table{
+    /* background-color: aliceblue; */
+    background: linear-gradient(45deg, #BFF098, #6FD6FF);
+    border-radius: 3rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.profileRow{
+    height: 50px;
+}
+.profileColumn{
+    /* border: 1px solid black; */
+    padding: 20px;
+}
+.profileColumn:hover{
+    transform: scale(1.1);
+}
+
+/*
+==============================================
+============= Display bills section ==========
+==============================================
+*/
+.billsTable{
+    width: auto;
+    height: auto;
+    margin-top: -50px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: linear-gradient(45deg, #BFF098, #6FD6FF);
+    margin-bottom: 50px;
+    border-radius: 3rem;
+}
+.billsHeading{
+    /* background-color: aqua; */
+
+}
+.billsRow{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .billsColumn{
+    padding-left:  15px;
+    padding-right: 15px;
+    overflow: hidden;
+} */
+
+.billsColumn {
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+}
+  
+
+.billsColumn.heading{
+    font-size: large;
+    font-weight: 750;
+    border-bottom-width: 2px;
+    padding: 20px;
+}
+.billsColumn.content{
+    font-size: medium;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    max-width: 200px;
+    /* border-bottom-width: 1px; */
+}
+.reminder{
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
+    border-radius: 3rem;
+    background-color: rgb(21, 190, 83) ;
+    color:white;
+}
+.reminder:hover  {
+    transition-duration: 0.2s;
+    background-color: rgb(52, 56, 54);
+    border-color: rgb(52, 56, 54);
+
+}
+/*
+==============================================
+============= create Bills section ===========
+==============================================
+*/
+.billBox{
+    /* height: 700px; */
+    width: 700px;
+    background-color: white;
+    margin: auto;
+    margin-top: -50px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 2rem;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 400px 300px;
+    grid-template-rows: 100px auto;
+    
+}
+.billTitle{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    position: relative;
+    padding-top: 20px;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 700;
+    background: linear-gradient(45deg, #BFF098, #6FD6FF);
+}
+
+.billImg{
+    position: relative;
+    width: 100%;
+    
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.billForm{
+    background-color: #e3ebee;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+.billFormSpace{
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+    height: 35px;
+    width: 250px;
+
+}
+.createBill{
+    border: none;
+    background-color: rgb(21, 190, 83) ;
+    color:white;
+    width: 120px;
+    border-radius: 2rem;
+    height: 45px;
+}
+
+
+.createBill:hover{
+    transform: scale(1.05);
+    transition-duration: 0.2s;
+    background-color: rgb(3, 32, 14);
+    border-color:rgb(3, 32, 14);
+}
+/*
+==============================================
+============= Other functions ================
+==============================================
+*/
+
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #ffffff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }

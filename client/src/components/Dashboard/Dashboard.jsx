@@ -1,60 +1,69 @@
-import React from "react";
-import Sidebar from "./Sidebar";
-import Navbar from "./Dnavbar";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
-import { Outlet } from "react-router-dom";
-import { createContext, useContext, useState } from 'react';
-import Form from "./Form";
-import DataContext from './context';
-import DisplayOrder from "./DisplayOrder";
-import Profile from "./Profile";
+import {
+  createBrowserRouter,
+  Link,
+  Outlet,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { ProfileIcon } from "./OtherFn";
+import { useUserStatContext } from "../../Context/Context";
 
-const Dashboard = ({children}) => {
+export default function Dashboard() {
+  const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
+  const {stat,setStat} = useUserStatContext();
+  useEffect(()=>{
+    // console.log("in Dashboard");
+    // console.log(localStorage.getItem("auth-token"));
+    if(!localStorage.getItem("auth-token")){
+      navigate("/");
+      setStat(false);
+    }
+  },[])
+  return (
+    <>
+      <Loader loader={loader} />
 
-    const [load, setLoad] = useState(0);
-    const dark = "dark_val";
-    const renderContent = () => {
-        switch (load) {
-            case "bill":
-                return <div className="text-center"><DisplayOrder/></div>;
-            case "profile":
-                return <div className="text-center"><Profile/></div>;
-            case "NewBill":
-                return <Form/>;
-            default:
-                return <div className="text-center">Unknown load state {load}</div>;
-        }
-    };
+      <div>
+        <div className="dashboard">
+          <div className="logo">
+            <Link to="/" className="logo">
+              <span style={{ color: "black" }}>Auto</span>
+              <span style={{ color: "white" }}>Billing</span>
+            </Link>
+          </div>
+          <ProfileIcon/>
+          <div className="sidePanel">
+            <Link to="./">
+              <button className="sidePanelItem">Profile</button>
+            </Link>
+            <Link to="./Bills">
+              <button className="sidePanelItem">All Bills</button>
+            </Link>
+            <Link to="./Create">
+              <button className="sidePanelItem">Create Bill</button>
+            </Link>
+          </div>
 
+          <div className="contents">
+            <Outlet />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function Loader({ loader }) {
+  if (loader) {
     return (
-
-
-        <DataContext.Provider value={{load,setLoad}}>
-            <div className="dashboard">
-                <h1> hello world</h1>
-
-                <div className="left-component">
-                    <Sidebar />
-                </div>
-                <div className="right-component">
-                    <div className="top-right-component">
-                        <Navbar />
-
-                        {/* <button className="mr-5" onClick={() => setLoad(1)}>set1</button>
-                        <button className="mr-5" onClick={() => setLoad(2)}>set2</button>
-                        <button className="mr-5" onClick={() => setLoad(3)}>set3</button>
-                        <button className="mr-5" onClick={() => setLoad(0)}>set0</button> */}
-                    </div>
-                    <div className="bottom-right-component"></div>
-                </div>
-                <div className="content">
-                    <hr />
-                    {renderContent()}
-                </div>
-            </div>
-        </DataContext.Provider>
-
+      <div className="loader-block">
+        <div className="loader"></div>
+      </div>
     );
-};
-
-export default Dashboard;
+  } else return null;
+}

@@ -7,6 +7,8 @@ import axios from "axios";
 import { useUserDataContext, useUserStatContext } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
 
+const backend_url = process.env.REACT_APP_BACKEND_URL;
+
 const defaultVal = {
     name:"",
     firstname: "",
@@ -33,7 +35,7 @@ export default function SignUp({setAlertVal,setLoader}) {
     setLoader(true);
     await axios
     // .post("http://localhost:8000/addUser", signUp)
-    .post("https://autobilling-gu29.onrender.com/addUser",signUp)
+    .post(`${backend_url}/addUser`,signUp)
     .then((data) => {
       console.log(data);
       if(data.data[0] === false){

@@ -5,6 +5,9 @@ import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserDataContext, useUserDataContext, useUserStatContext } from "../../Context/Context";
 import { Link, useNavigate } from "react-router-dom";
+
+const backend_url = process.env.REACT_APP_BACKEND_URL;
+
 export function Profile() {
   const navigate = useNavigate();
   const defaultVal = {
@@ -86,7 +89,7 @@ export function Bills() {
     try {
       const User = billData.find((item) => item._id === index);
       const response = await axios.post(
-        "https://autobilling-gu29.onrender.com/sendEmail",
+        `${backend_url}/sendEmail`,
         { User },
         {
           headers: {
@@ -100,7 +103,7 @@ export function Bills() {
         localStorage.setItem("auth-token", response.data.token);
         await axios
           .post(
-            "https://autobilling-gu29.onrender.com/sendEmail",
+            `${backend_url}/sendEmail`,
             { User },
             {
               headers: {
@@ -132,7 +135,7 @@ export function Bills() {
     // console.log("current token : ", localStorage.getItem("auth-token"));
     try {
       const response = await axios.post(
-        "https://autobilling-gu29.onrender.com/fetchOrdersByEmail",
+        `${backend_url}/fetchOrdersByEmail`,
         {shopEmail:userData.shopEmail},
         {
           headers: {
@@ -245,7 +248,7 @@ export function Create() {
   const addbill = async () => {
     setLoader(true);
     try {
-      const response = await axios.post("https://autobilling-gu29.onrender.com/addBill", bill, {
+      const response = await axios.post(`${backend_url}/addBill`, bill, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
         },

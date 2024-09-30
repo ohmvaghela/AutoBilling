@@ -5,6 +5,8 @@ import validator from "validator";
 import { useUserDataContext, useUserStatContext } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
 
+const backend_url = process.env.REACT_APP_BACKEND_URL;
+
 export default function LogIn({ setLoader }) {
   const navigate = useNavigate();
   const { stat, setStat } = useUserStatContext();
@@ -15,10 +17,11 @@ export default function LogIn({ setLoader }) {
   });
   const formRef = useRef(null);
   const loginFn = async () => {
+    console.log("login request",`${backend_url}/loginUser`);
     console.log(login);
     setLoader(true);
     await axios
-      .post("https://autobilling-gu29.onrender.com/loginUser",login)
+      .post(`${backend_url}/loginUser`,login)
       // .post("http://localhost:8000/loginUser", login)
       .then((response) => {
         console.log(response);

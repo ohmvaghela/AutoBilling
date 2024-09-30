@@ -69,4 +69,7 @@ app.use("/fetchOrdersByEmail",validateToken,fetchOrdersByEmail);
 const paymentRouter = require("./routes/payment.js");
 app.use("/payment",paymentRouter);
 
+const logRazorPayment = require("./routes/paymentRecordHook.js");
+app.use("/razorPaymentEvent",logRazorPayment);
+
 app.listen(8000);

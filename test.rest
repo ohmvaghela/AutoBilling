@@ -1,0 +1,7 @@
+# razor payment
+GET http://localhost:8000/razorPaymentEvent
+Content-Type: application/json
+
+{
+  "name":"ohm"
+}

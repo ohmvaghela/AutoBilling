@@ -1,5 +1,5 @@
 # razor payment
-GET http://localhost:8000/razorPaymentEvent
+GET https://autobilling-gu29.onrender.com/razorPaymentEvent
 Content-Type: application/json
 
 {

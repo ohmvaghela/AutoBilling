@@ -4,10 +4,10 @@ import "./Sign.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import validator from "validator";
 import axios from "axios";
-import { useUserDataContext, useUserStatContext } from "../../Context/Context";
+import { useBackendContext, useUserDataContext, useUserStatContext } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
 
-const backend_url = process.env.REACT_APP_BACKEND_URL;
+const backend_url = 'http://localhost:8000';
 
 const defaultVal = {
     name:"",
@@ -21,6 +21,7 @@ export default function SignUp({setAlertVal,setLoader}) {
   const navigate = useNavigate(); 
   const {stat,setStat} = useUserStatContext();
   const {userData,setUserData} = useUserDataContext();
+  const {backendUrl,setBackendUrl} = useBackendContext();
 
   const [signUp, setSignUp] = useState({
     name:"",
@@ -35,7 +36,7 @@ export default function SignUp({setAlertVal,setLoader}) {
     setLoader(true);
     await axios
     // .post("http://localhost:8000/addUser", signUp)
-    .post(`${backend_url}/addUser`,signUp)
+    .post(`${backendUrl}/addUser`,signUp)
     .then((data) => {
       console.log(data);
       if(data.data[0] === false){

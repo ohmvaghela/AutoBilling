@@ -14,6 +14,7 @@ import { Profile, Bills, Create } from "./components/Dashboard/OtherFn";
 import { useEffect, useState } from "react";
 import {
   CountContext,
+  BackendUrlContext,
   UserDataContext,
   UserStatContext,
 } from "./Context/Context";
@@ -70,6 +71,8 @@ const browserRoute = createBrowserRouter([
 ]);
 
 function App() {
+  const [backendUrl, setBackendUrl] = useState();
+
   const [stat, setStat] = useState(() => {
     const savedStat = localStorage.getItem("stat");
     return savedStat !== null ? JSON.parse(savedStat) : false;
@@ -90,20 +93,26 @@ function App() {
   }, [stat]);
 
   useEffect(() => {
+    setBackendUrl("http://localhost:8000");
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
 
-  useEffect(()=>{
-    localStorage.setItem("count", JSON.stringify(count))
-  },[count]);
+  useEffect(() => {
+    localStorage.setItem("count", JSON.stringify(count));
+  }, [count]);
   return (
-    <CountContext.Provider value={{ count, setCount }}>
-      <UserDataContext.Provider value={{ userData, setUserData }}>
-        <UserStatContext.Provider value={{ stat, setStat }}>
-          <RouterProvider router={browserRoute}></RouterProvider>
-        </UserStatContext.Provider>
-      </UserDataContext.Provider>
-    </CountContext.Provider>
+    <BackendUrlContext.Provider value={{ backendUrl, setBackendUrl }}>
+      <CountContext.Provider value={{ count, setCount }}>
+        <UserDataContext.Provider value={{ userData, setUserData }}>
+          <UserStatContext.Provider value={{ stat, setStat }}>
+            <RouterProvider router={browserRoute}></RouterProvider>
+          </UserStatContext.Provider>
+        </UserDataContext.Provider>
+      </CountContext.Provider>
+    </BackendUrlContext.Provider>
   );
 }
 

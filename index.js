@@ -27,6 +27,10 @@ app.set("view engine","ejs");
 
 require("./connect");
 
+app.get("",(req,res)=>{
+  res.send("autobilling hello!");
+});
+
 const addUserRouter = require("./routes/addUser.js");
 app.use("/addUser",addUserRouter);
 

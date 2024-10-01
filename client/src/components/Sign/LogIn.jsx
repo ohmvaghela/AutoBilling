@@ -2,26 +2,27 @@ import React, { useRef, useState } from "react";
 import "./Sign.css";
 import axios from "axios";
 import validator from "validator";
-import { useUserDataContext, useUserStatContext } from "../../Context/Context";
+import { useBackendContext, useUserDataContext, useUserStatContext } from "../../Context/Context";
 import { useNavigate } from "react-router-dom";
 
-const backend_url = process.env.REACT_APP_BACKEND_URL;
+// const backend_url = 'http://localhost:8000';
 
 export default function LogIn({ setLoader }) {
   const navigate = useNavigate();
   const { stat, setStat } = useUserStatContext();
   const {userData,setUserData} = useUserDataContext();
+  const {backendUrl,setBackendUrl} = useBackendContext();
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
   const formRef = useRef(null);
   const loginFn = async () => {
-    console.log("login request",`${backend_url}/loginUser`);
+    console.log("login request",`${backendUrl}/loginUser`);
     console.log(login);
     setLoader(true);
     await axios
-      .post(`${backend_url}/loginUser`,login)
+      .post(`${backendUrl}/loginUser`,login)
       // .post("http://localhost:8000/loginUser", login)
       .then((response) => {
         console.log(response);

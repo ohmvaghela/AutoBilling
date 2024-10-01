@@ -15,6 +15,24 @@ export const CountContext = createContext({
     setCount:undefined,
 })
 
+export const BackendUrlContext = createContext({
+    backendUrl:undefined,
+    setBackendUrl:undefined,
+})
+
+export function useBackendContext(){
+    const backendContext = useContext(BackendUrlContext);
+    if(backendContext.backendUrl === undefined){
+        throw new Error("backend url undefined");
+    }
+    if(backendContext.setBackendUrl === undefined){
+        throw new Error("set backend url undefined");
+    }
+    else{
+        return backendContext;
+    }
+}
+
 export function useCountContext(){
     const counterContext = useContext(CountContext);
     if(counterContext.count === undefined){

@@ -3,10 +3,10 @@ import "./OtherFn.css";
 import axios from "axios";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { UserDataContext, useUserDataContext, useUserStatContext } from "../../Context/Context";
+import { useBackendContext, UserDataContext, useUserDataContext, useUserStatContext } from "../../Context/Context";
 import { Link, useNavigate } from "react-router-dom";
 
-const backend_url = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = 'http://localhost:8000';
 
 export function Profile() {
   const navigate = useNavigate();
@@ -15,43 +15,9 @@ export function Profile() {
     lastName: "Default lastname",
     shopEmail: "Default email",
   };
+  const {backendUrl,setBackendUrl} = useBackendContext();
   const { stat, setStat } = useUserStatContext();
   const {userData, setUserData} = useUserDataContext();
-  // const [userData, setUserData] = useState(defaultVal);
-  // const updateUserData = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8000/userData",
-  //       { _id: "66bb9aabf9eccd5f57093ec0" },
-  //       {
-  //         headers: {
-  //           "auth-token": localStorage.getItem("auth-token"),
-  //         },
-  //         withCredentials: true,
-  //       }
-  //     );
-  //     if (response.status === 206) {
-  //       // console.log("new token required");
-  //       localStorage.removeItem("auth-token");
-  //       localStorage.setItem("auth-token", response.data.token);
-  //       await updateUserData();
-  //     } else {
-  //       // console.log(response.data);
-  //       setUserData({
-  //         firstName: response.data.firstName,
-  //         lastName: response.data.lastName,
-  //         shopEmail: response.data.shopEmail,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     navigate("/");
-  //     setStat(false);
-  //     console.log(error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   updateUserData();
-  // }, []);
 
   return (
     <div className="base_table">
@@ -81,6 +47,7 @@ export function Bills() {
   const [loader, setLoader] = useState(false);
   const [loadingButtons, setLoadingButtons] = useState({});
   const {userData,setUserData} = useUserDataContext();
+  const {backendUrl,setBackendUrl} = useBackendContext();
 
   const handleReminderClick = async (index) => {
     setLoadingButtons((prev) => ({ ...prev, [index]: true }));
@@ -89,7 +56,7 @@ export function Bills() {
     try {
       const User = billData.find((item) => item._id === index);
       const response = await axios.post(
-        `${backend_url}/sendEmail`,
+        `${backendUrl}/sendEmail`,
         { User },
         {
           headers: {
@@ -103,7 +70,7 @@ export function Bills() {
         localStorage.setItem("auth-token", response.data.token);
         await axios
           .post(
-            `${backend_url}/sendEmail`,
+            `${backendUrl}/sendEmail`,
             { User },
             {
               headers: {
@@ -135,7 +102,7 @@ export function Bills() {
     // console.log("current token : ", localStorage.getItem("auth-token"));
     try {
       const response = await axios.post(
-        `${backend_url}/fetchOrdersByEmail`,
+        `${backendUrl}/fetchOrdersByEmail`,
         {shopEmail:userData.shopEmail},
         {
           headers: {
@@ -240,6 +207,7 @@ export function Create() {
     billAmount: 1,
     billDescription: "",
   };
+  const {backendUrl,setBackendUrl} = useBackendContext();
 
   // Fetch the shop's name, and email
   const [bill, setBill] = useState(billDefault);
@@ -248,7 +216,7 @@ export function Create() {
   const addbill = async () => {
     setLoader(true);
     try {
-      const response = await axios.post(`${backend_url}/addBill`, bill, {
+      const response = await axios.post(`${backendUrl}/addBill`, bill, {
         headers: {
           "auth-token": localStorage.getItem("auth-token"),
         },
@@ -344,6 +312,8 @@ export function ProfileIcon() {
   const navigate = useNavigate();
   const {userData,setUserData} = useUserDataContext();
   const { stat, setStat } = useUserStatContext();
+  const {backendUrl,setBackendUrl} = useBackendContext();
+
   return (
     <>
       <Dropdown className="topPanel">

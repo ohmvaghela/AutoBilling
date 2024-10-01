@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  autobilling-server-container:
+    image: autobilling-server
+    ports:
+      - '8000:8000'
+    environment:
+      DATABASEURL: mongodb+srv://vaghelaohm:iL4U7zPZzhqWyfqm@autobillingcluster.q3gc3.mongodb.net/?retryWrites=true&w=majority&appName=AutobillingCluster
+      SECRET_KEY: bhaurand
+      KEY_ID: rzp_test_UvMifYX4pXStNf
+      KEY_SECRET: W04uDBrxnvOEfH5gip6YWnoL
+      FRONTEND_URL: http://localhost:4000
+      BACKEND_URL: http://localhost:8000
+  autobilling-client-container:
+    image: autobilling-client
+    ports:
+      - '4000:4000'
+    environment:
+      PORT: 4000
+      # REACT_APP_BACKEND_URL: http://localhost:8000
+
+

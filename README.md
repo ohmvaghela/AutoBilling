@@ -1,219 +1,206 @@
-# Setting Up
-- Add .env file
-- run "npm i"
-- run "nodemon index.js"
-
-# Work FLOW
-
 <center>
 
-<img src="./AutoBilling.drawio.png">
+||||
+|-|-|-|
+| <img src="./readme/docker.png" width=600/> | <img src="./readme/MERN.png" /> | <img src="./readme/kube.png" width=500/> |
+
+
+# Autobilling APP
 
 </center>
 
-# Installed
+- This application enables shopkeepers to efficiently create and manage bills.
+- Automated emails with Razorpay payment gateway integration will be sent on a scheduled basis for seamless payment processing.
 
-|                       |                                                         |
-| --------------------- | ------------------------------------------------------- |
-| `mongoose`            | MongoDB ORM for Node.js data modeling.                  |
-| `mongodb`             | NoSQL database for scalable, document-oriented storage. |
-| `express`             | Minimalist Node.js web application framework.           |
-| `bcryptjs`              | Password hashing library for secure authentication.     |
-| `jsonwebtoken`        | Token-based authentication and authorization mechanism. |
-| `multer`              | Middleware for handling file uploads in Node.js.        |
-| `nodemon`             | Utility for automatic Node.js server restarts.          |
-| `validator`           |                                                         |
-| `mongoose-type-email` |                                                         |
-| `dotenv`              |                                                         |
-| `cookie-parser`              |Used for saving authentication token to the cookie                                                         |
+# Setting Up NodeJs local env
+- Node version : `v20.13.1`
+- NPM version : `v20.13.1`
+- Enviroment variables required
+```sh
+DATABASEURL = # generate your mongodb databaseURL 
+SECRET_KEY = # used for JWT
+KEY_ID = # razorpay key_id
+KEY_SECRET = # razorpay key_id
+FRONTEND_URL = # react app url for local testing use : http://localhost:4000
+BACKEND_URL = # server url for local testing use : http://localhost:8000
+```
+- Install dependencies
+    ```
+    npm i
+    ```
+- Install nodemon for better testing 
+    ```
+    npm i nodemon
+    ```
+- Running server
+    ```
+    nodemon index.js
+    ```
+    - If you see `connected` message in log then app is running fine
+### Web hook for reacording payment
+- Setup a webhook reacording payment event on razorpay and provide API at route `/razorPaymentEvent`
 
-# REQUESTS
-- User SignUp
-    - Request
+# Setting up react app
+- Install dependencies
     ```
-    http://localhost:8000/addUser
+    npm i
     ```
-    - Body
+- Start react app
     ```
-    {
-    "shopName":"xyz",
-    "firstName":"xyz",
-    "shopEmail":"xyz@gmail.com",
-    "lastName":"xyz",
-    "password":"xyz"
-    }
-    ```
-
-- User Login
-    - Request
-    ```
-    http://localhost:8000/loginUser
-    ```
-    - Body
-    ```
-    {
-    "loginEmail": "xyz@gmail.com",
-    "password": "xyz"
-    }
-    ```
-- Add bill
-    - Request
-    ```
-    http://localhost:8000/addBill
-    ```
-    - Body
-    ```
-    {
-    "consumerName" :"rishab",
-    "consumerEmail" :"rkt10@iitbbs.ac.in",
-    "shopEmail" :"an30@iitbbs.ac.in",
-    "billAmount" :5000,
-    "billDescription":"sadas"
-    }
-    ```
-- Bill Fetch
-    - Request
-    ```
-    http://localhost:8000/billFetch/:id
-    ```
-- Shop Fetch
-    - Request
-    ```
-    http://localhost:8000/shopFetch?email=xyz.gmail.com
+    PORT=4000 npm start
     ```
 
-### WebHooks
-- Say we want to subscribe some events on 3rd party server side say razorpay SDK
-- So we cant be connected to the server 24x7 
-- So instead we create a webhook 
-- In Webhooks instead of our server fetching info about the events 3rd party server sends payload whenever event is triggered
-- For that we provide our URL and events that we want to subscribe from 3rd party server  
-
-## Changes
-- BillFetch
-- ShopFetch
 
 
-## JWT v/s Session Storage
+# Workflow
+<center>
 
-### Session Storage
-- When client sends inital request it is authorised
-- If request is valid the a session ID is stored in server 
-- This session ID is sent back to client as cookie
-- Now whenever client again sends requests
-    - Server matches it with session key stored in its server
+### List of all the API calls
+<img src="./readme/app.drawio (1).png"/>
+</center>
 
-### JWT (JSON Web Token)
-- For inital authorisation it is same as session storage
-- When user is authorised it is encoded using a secret key and sent back to client and token is not stored in server
-- When again client sends request with JWT, server uses secret key and check for JWT 
-- If token matches then server sends appropriate response
-- It consist of 3 parts 
-    1. Header
-    2. Payload
-    3. Signature (Hashed with secret key)
-
-### Session Storage v/s JWT
-- Session ID needs to be stored in a server while JWT is not stored in server.
-- When a client changes server so authorisation is again required as session ID is not present on this server
-- On contrast JWT's secret key is present on all server so it can be easily used to compare token 
-- Hence JWT is scalable
-
-## Razorpay 
-- We are using razorpay SDK for managing payments
-- We initially create a razorpay instance
-    ```js
-    var razorpayInstance = new Razorpay({
-    key_id: KEY_ID,
-    key_secret: KEY_SECRET,
-    });
+# Containerizing application
+- `Server` : From the root directory apply
     ```
-- This instance will be used to intract with razorpay in future
-- This instance is just a normal JSON object containing id,secret and other info
+    root/Autobilling$ docker build -t <image-name>:<tag> -f ./docker/Dockerfile .
+    ```
+    ```
+    root/Autobilling$ docker build -t local-server -f ./docker/Dockerfile .
+    ```
+- `Client` : From the /client directory
+    ```
+    root/Autobilling/client$ docker build -t <image-name>:<tag> -f ./docker/Dockerfile .
+    ```
+    ```
+    root/Autobilling/client$ docker build -t local-client -f ./docker/Dockerfile .
+    ```
+## Run app locally using docker image and docker compose
+- Docker compose
+    ```yaml
+    version: '3.8'
+    services:
+      autobilling-server-container:
+        image: local-server
+        ports:
+          - '8000:8000'
+        environment:
+          DATABASEURL: # DATABASEURL  
+          SECRET_KEY: # SECRET_KEY  
+          KEY_ID: # KEY_ID  
+          KEY_SECRET: # KEY_SECRET 
+          FRONTEND_URL: # FRONTEND_URL 
+          BACKEND_URL: # BACKEND_URL 
+      autobilling-client-container:
+        image: local-client
+        ports:
+          - '4000:4000'
+        environment:
+          PORT: 4000
+    ```
 
-### Creating order 
-- Razorpay's endpoint `Order` API uses POST request is used to create an order
-```js
-    var options = {
-        amount: a.amount,
-        currency: "INR",
-        receipt: "rcp1",
-        notes: {
-            description: "notes desc",
-            language: " lang",
-            access: "access",
-        },
-    };
-
-    razorpayInstance.orders.create(options, (err, order) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(order);
-      }
-    });
+# Hosting a containerized application using Kubernetes on Google Cloud
+- Secret files are not present in kubernetes folder
+- Following is boiler plate code fill it with info
+- Here I am assuming you have a domain and obtained a tls/ssl certificate
+- Also reserve a static IP for both server and client
+- The app wont work untill it is deployed on HTTPS as the CORS wont allow to attach cookies to the requests
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-secret
+  namespace: server 
+type: Opaque
+data:
+  databaseurl: # 64 byte encoded  
+  secret-key: # 64 byte encoded 
+  key-id: # 64 byte encoded 
+  key-secret: # 64 byte encoded 
 ```
 
-### Order Payment 
-- We are currently using rendering a page everytime payment button is clicked
-- Over there we have a button to initalise payment 
-- A when the button is pressed a razorpay instance is created
-- After that a model is created using the checkout script provided by razorpay
-- And the response is logged 
 
-### Whenever we use billFetch 
-- It fetches all bills from razorpay and mongoDB and compares then if the status is success or remaining and the same is displayed
+```yaml
 
-## Mailing
-- SMTP (Simple Mail Transfer Protocal)
-- POP3 (Post Office Protocol)
-- IMAP (Internet Message Access Protocol) 
-- SMTP is used for sending mail 
-- When we click on send mail so the mail is sent to over mail server using SMTP
-- Then it is sent to the reciever's mail server using SMTP
-- Then user's email fetches those mails using POP3 or IMAP
-- In IMAP : we can access email using email server we cannot download to local machine 
-- In POP3 : It downloads emails to local machines and then it is removed from the email server
-- IMAP is most widely used
-- <img src="./SMTP.webp">
+apiVersion: v1
+kind: Secret
+metadata:
+  name: server-ssl-secret
+  namespace: server 
+type: kubernetes.io/tls
+data:
+  tls.crt: # 64 byte encoded
+  tls.key: # 64 byte encoded
 
-## NodeMailer
-- Gmail has OAuth2 : `Open Authorization` for protections against spammers
-- So we cant directly send mail
-- Hence gmail came up with allow plain userid and password for less secure apps
-    - These apps need to be added to gmail
-- Other way is using app specific password which is used in our case
+---
 
-## JWT
-- Contains 3 parts seperated by `.` 
-    1. Hashing algo
-    2. Payload
-    3. Hash with secret key
-- Base 64 encoded
-- When server recieve JWT it compares it with secret key
-    - It uses First and second part and adds secret key to it and then hashes it 
-    - If the hash matches with the 3rd part then payload is verified
+apiVersion: v1
+kind: Secret
+metadata:
+  name: client-ssl-secret
+  namespace: client  
+type: kubernetes.io/tls
+data:
+  tls.crt: # 64 byte encoded
+  tls.key: # 64 byte encoded
 
-
-## Scheduled Email sender
-- node-cron is used to send periodic mail
-- Upadtes in billschema
-```js
-    reminder:{
-        type: Number,
-        require: true,
-        default: 7,
-    },
-    remdinderDate:{
-        type: Date,
-        require: true,
-        default: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    }
 ```
-- If expirey date exceeds then send bill each day
-```js
-cron.schedule("0 0 * * *", () => {
-    schedular();
-});
+
+<center>
+<img src="./readme/cluster.drawio.png">
+</center>
+
+- To test APIs use the test.rest file after installing REST client extenstion on vs code 
+```yaml
+### Login
+POST http://localhost:8000/loginUser
+Content-Type: application/json
+
+{
+  "email": "ohmvaghela1@gmail.com",
+  "password": "ohm123ohm"
+}
+
 ```
-- Above function checks if the checks the bills whose reminder period is over and we need to send email to them
+
+```yaml
+### Signup
+POST http://localhost:8000/addUser
+Content-Type: application/json
+
+{
+  "shopName": "req.body.name",
+  "firstName": "req.body.firstname",
+  "lastName": "req.body.lastname",
+  "shopEmail": "req.body.email",
+  "password": "password"
+}
+
+```
+
+```yaml
+### Add Bill
+POST http://localhost:8000/addbill
+Content-Type: application/json
+auth-token: {{auth-token}}
+
+{
+  "consumerName": "req.body.consumerName",
+  "consumerEmail": "req.body.consumerEmail",
+  "shopEmail": "req.body.shopEmail",
+  "billAmount": "req.body.billAmount",
+  "billDescription": "req.body.billDescription"
+}
+
+```
+
+```yaml
+### Fetch Bill by Email
+POST http://localhost:8000/fetchOrderByEmail
+Content-Type: application/json
+auth-token: {{auth-token}}
+
+{
+  "shopEmail": "req.body.shopEmail"
+}
+
+```

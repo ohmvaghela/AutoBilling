@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   autobilling-server-container:
-    image: autobilling-server
+    image: local-server
     ports:
       - '8000:8000'
     environment:
@@ -12,7 +12,7 @@ services:
       FRONTEND_URL: http://localhost:4000
       BACKEND_URL: http://localhost:8000
   autobilling-client-container:
-    image: autobilling-client
+    image: local-client
     ports:
       - '4000:4000'
     environment:

@@ -76,7 +76,7 @@ userSchema.methods.generateRefreshToken = async function ()  {
     const refreshToken = jwt.sign(
       { _id: this._id.toString() },
       process.env.SECRET_KEY,
-      {expiresIn: '1 day'}//expirey time 1min
+      { expiresIn: '8h' }  // Expiry time 8 hours
     );
     // save the token if req
     // this.tokens = this.tokens.concat({token:refreshToken});

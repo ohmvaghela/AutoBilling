@@ -1,7 +1,42 @@
-# razor payment
-GET https://autobilling-gu29.onrender.com/razorPaymentEvent
+### Login
+POST http://localhost:8000/loginUser
 Content-Type: application/json
 
 {
-  "name":"ohm"
+  "email": "ohmvaghela1@gmail.com",
+  "password": "ohm123ohm"
+}
+
+### Signup
+POST http://localhost:8000/addUser
+Content-Type: application/json
+
+{
+  "shopName": "req.body.name",
+  "firstName": "req.body.firstname",
+  "lastName": "req.body.lastname",
+  "shopEmail": "req.body.email",
+  "password": "password"
+}
+
+### Add Bill
+POST http://localhost:8000/addbill
+Content-Type: application/json
+auth-token: {{auth-token}}
+
+{
+  "consumerName": "req.body.consumerName",
+  "consumerEmail": "req.body.consumerEmail",
+  "shopEmail": "req.body.shopEmail",
+  "billAmount": "req.body.billAmount",
+  "billDescription": "req.body.billDescription"
+}
+
+### Fetch Bill by Email
+POST http://localhost:8000/fetchOrderByEmail
+Content-Type: application/json
+auth-token: {{auth-token}}
+
+{
+  "shopEmail": "req.body.shopEmail"
 }

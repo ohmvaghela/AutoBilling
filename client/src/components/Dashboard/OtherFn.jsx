@@ -109,6 +109,7 @@ export function Bills() {
             "auth-token": localStorage.getItem("auth-token"),
           },
           withCredentials: true,
+          credentials: 'include',
         }
       );
 

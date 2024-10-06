@@ -2,3 +2,9 @@
 **/node_modules
 **/.history
 **/build
+**/docker-compose.yml
+./docker/docker-compose.yml
+**/autobilling-secret.yaml
+**/autobilling-ssl.yaml
+
+

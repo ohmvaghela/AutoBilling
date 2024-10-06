@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autobilling-backend
+  namespace: server 
+  labels: 
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: autobilling-server-pod
+        image: ohmv10/autobilling-server:1.0
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASEURL
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: databaseurl
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: secret-key
+        - name: KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: key-id
+        - name: KEY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: key-secret
+        - name: FRONTEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-configmap
+              key: frontend-url
+        - name: BACKEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-configmap
+              key: backend-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autobilling-backend-service
+  namespace: server 
+spec:
+  selector:
+    app: backend
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000

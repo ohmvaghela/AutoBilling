@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: autobilling-backend-ingress
+  namespace: server
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.global-static-ip-name: "autobilling-backend"
+spec:
+  tls:
+  - hosts:
+    - autobilling.backend.vibevaulttech.co.in
+    secretName: server-ssl-secret
+  rules:
+  - host: autobilling.backend.vibevaulttech.co.in
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: autobilling-backend-service
+            port:
+              number: 8000

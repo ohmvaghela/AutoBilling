@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-configmap
+  namespace: server  # Updated to server namespace
+data:
+  backend-url: "https://autobilling.backend.vibevaulttech.co.in"
+  frontend-url: "https://autobilling.vibevaulttech.co.in"

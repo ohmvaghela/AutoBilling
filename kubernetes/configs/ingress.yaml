@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: autobilling-backend-ingress
+  namespace: server
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "autobilling-backend"
+    networking.gke.io/managed-certificates: backend-mcrt
+    kubernetes.io/ingress.class: "gce" 
+    # networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
+spec:
+  rules:
+  - host: autobilling.backend.vibevaulttech.co.in
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: autobilling-backend-service
+            port:
+              number: 8000
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: autobilling-client-ingress
+  namespace: client  
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "autobilling-frontend"
+    networking.gke.io/managed-certificates: frontend-mcrt
+    kubernetes.io/ingress.class: "gce" 
+    networking.gke.io/v1beta1.FrontendConfig: "http-to-https"
+spec:
+  rules:
+  - host: autobilling.vibevaulttech.co.in
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: autobilling-frontend-service
+            port:
+              number: 4000
+

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: autobilling-client-pod
-        image: ohmv10/autobilling-client:server.v1.0
+        image: ohmv10/autobilling-client:v2.0
         ports:
         - containerPort: 4000
 ---
@@ -29,6 +29,7 @@ metadata:
 spec:
   selector:
     app: frontend
+  type: NodePort
   ports:
   - protocol: TCP
     port: 4000

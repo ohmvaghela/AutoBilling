@@ -33,7 +33,8 @@ router.post("/", async (req, res) => {
         console.log(cur_route + "user added succesfully");
         res.cookie("jwt", refreshToken, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          // secure: process.env.NODE_ENV === "production",
+          secure: true,
           expires: new Date(Date.now() + 8 * 3600000), // 8 hours
           sameSite: "None", // Must be 'None' to allow cross-site requests
         });

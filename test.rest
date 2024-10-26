@@ -1,5 +1,5 @@
 ### Login
-POST http://localhost:8000/loginUser
+POST https://autobilling.backend.vibevaulttech.co.in/loginUser
 Content-Type: application/json
 
 {
@@ -20,9 +20,9 @@ Content-Type: application/json
 }
 
 ### Add Bill
-POST http://localhost:8000/addbill
+POST https://autobilling.backend.vibevaulttech.co.in/addbill
 Content-Type: application/json
-auth-token: {{auth-token}}
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmJiOWFhYmY5ZWNjZDVmNTcwOTNlYzAiLCJpYXQiOjE3Mjk5NDUwNDAsImV4cCI6MTcyOTk0NTA3MH0.rI9EMNjE3SsW-7IKlm85Q9kBMk7GdP0BL3jswZkTnXM
 
 {
   "consumerName": "req.body.consumerName",
@@ -33,10 +33,10 @@ auth-token: {{auth-token}}
 }
 
 ### Fetch Bill by Email
-POST http://localhost:8000/fetchOrderByEmail
+POST https://autobilling.backend.vibevaulttech.co.in/fetchOrderByEmail
 Content-Type: application/json
-auth-token: {{auth-token}}
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmJiOWFhYmY5ZWNjZDVmNTcwOTNlYzAiLCJpYXQiOjE3Mjk5NDUwNDAsImV4cCI6MTcyOTk0NTA3MH0.rI9EMNjE3SsW-7IKlm85Q9kBMk7GdP0BL3jswZkTnXM
 
 {
-  "shopEmail": "req.body.shopEmail"
+  "shopEmail": "ohmvaghela@gmail.com"
 }

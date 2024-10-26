@@ -1,0 +1,19 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: backend-mcrt
+  namespace: server
+spec:
+  domains:
+    - autobilling.backend.vibevaulttech.co.in
+
+---
+
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: frontend-mcrt
+  namespace: client
+spec:
+  domains:
+    - autobilling.vibevaulttech.co.in

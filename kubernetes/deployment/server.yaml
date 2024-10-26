@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: autobilling-server-pod
-        image: ohmv10/autobilling-server:1.0
+        image: ohmv10/autobilling-server:1.0.cookie.test
         ports:
         - containerPort: 8000
         env:
@@ -60,6 +60,7 @@ metadata:
 spec:
   selector:
     app: backend
+  type: NodePort
   ports:
   - protocol: TCP
     port: 8000

@@ -94,7 +94,8 @@ function App() {
 
   useEffect(() => {
     // setBackendUrl("http://34.49.131.28");  
-    setBackendUrl("https://autobilling.backend.vibevaulttech.co.in");
+    // setBackendUrl("https://autobilling.backend.vibevaulttech.co.in");
+    setBackendUrl("localhost:8000");
   }, []);
 
   useEffect(() => {

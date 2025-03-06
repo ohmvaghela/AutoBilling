@@ -1,5 +1,6 @@
 ### Login
-POST https://autobilling.backend.vibevaulttech.co.in/loginUser
+# POST https://autobilling.backend.vibevaulttech.co.in/loginUser
+POST http://localhost:8000/loginUser
 Content-Type: application/json
 
 {
@@ -33,10 +34,24 @@ auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmJiOWFhYmY5ZWNjZDV
 }
 
 ### Fetch Bill by Email
-POST https://autobilling.backend.vibevaulttech.co.in/fetchOrderByEmail
+# POST https://autobilling.backend.vibevaulttech.co.in/fetchOrderByEmail
+POST http://localhost:8000/fetchOrderByEmail
 Content-Type: application/json
 auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmJiOWFhYmY5ZWNjZDVmNTcwOTNlYzAiLCJpYXQiOjE3Mjk5NDUwNDAsImV4cCI6MTcyOTk0NTA3MH0.rI9EMNjE3SsW-7IKlm85Q9kBMk7GdP0BL3jswZkTnXM
 
 {
-  "shopEmail": "ohmvaghela@gmail.com"
+  "shopEmail": "vaghleaohm@gmail.com"
 }
+
+### 
+POST http://localhost:8000/sendEmail
+Content-Type: application/json
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmJiOWFhYmY5ZWNjZDVmNTcwOTNlYzAiLCJpYXQiOjE3NDExOTk2MzMsImV4cCI6MTc0MTE5OTY2M30._B3ftZWUFwCEhJikjoyRNNlILSjxq1xcf7banth1Zr0
+
+{
+  "User":{
+    "consumerEmail":"vaghelaohm@gmail.com",
+    "_id":"66bc9628add10466ad8ad745"
+  }
+}
+
